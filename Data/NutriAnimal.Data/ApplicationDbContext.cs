@@ -26,6 +26,17 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<DeliveryCompany> DeliveryCompanies { get; set; }
+        public DbSet<DeliveryType> DeliveryTypes { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+      
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -49,6 +60,7 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
+            
 
             ConfigureUserIdentityRelations(builder);
 
