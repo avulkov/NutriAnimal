@@ -2,10 +2,12 @@
 {
     public class DeliveryCompany
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
         public decimal PricePerDelivery { get; set; }
+
+        public string Description { get; set; }
     }
 }

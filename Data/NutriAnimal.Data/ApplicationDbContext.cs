@@ -31,10 +31,15 @@
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Delivery> Deliveries { get; set; }
+
         public DbSet<DeliveryCompany> DeliveryCompanies { get; set; }
+
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
+
         public DbSet<Order> Orders { get; set; }
+
         public DbSet<Status> Statuses { get; set; }
+
       
 
         public override int SaveChanges() => this.SaveChanges(true);

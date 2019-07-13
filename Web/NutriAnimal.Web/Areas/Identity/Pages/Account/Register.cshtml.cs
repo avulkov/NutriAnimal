@@ -84,7 +84,7 @@
 
         public class InputModel
         {
-            public int MyProperty { get; set; }
+           
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]

@@ -202,9 +202,8 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -215,15 +214,14 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Delivery", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DeliveryCompanyId");
+                    b.Property<string>("DeliveryCompanyId");
 
-                    b.Property<int?>("DeliveryTypeId");
+                    b.Property<string>("DeliveryTypeId");
 
-                    b.Property<int?>("OrderId");
+                    b.Property<string>("OrderId");
 
                     b.Property<decimal>("Price");
 
@@ -244,9 +242,10 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.DeliveryCompany", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
@@ -259,9 +258,8 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.DeliveryType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -272,19 +270,18 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
 
-                    b.Property<int>("DeliveryCompanyId");
+                    b.Property<string>("DeliveryCompanyId");
 
                     b.Property<string>("OrderedById");
 
                     b.Property<DateTime>("OrderedOn");
 
-                    b.Property<int?>("StatusId");
+                    b.Property<string>("StatusId");
 
                     b.Property<decimal>("TotalPrice");
 
@@ -303,17 +300,16 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<string>("CategoryId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("OrderId");
+                    b.Property<string>("OrderId");
 
                     b.Property<decimal>("Price");
 
@@ -355,9 +351,8 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Status", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -434,8 +429,7 @@ namespace NutriAnimal.Data.Migrations
                 {
                     b.HasOne("NutriAnimal.Data.Models.DeliveryCompany", "DeliveryCompany")
                         .WithMany()
-                        .HasForeignKey("DeliveryCompanyId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("DeliveryCompanyId");
 
                     b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "OrderedBy")
                         .WithMany()

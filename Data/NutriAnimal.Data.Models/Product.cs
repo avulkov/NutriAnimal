@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NutriAnimal.Data.Models
+﻿namespace NutriAnimal.Data.Models
 {
-   public class Product
+    public class Product
     {
 
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -17,10 +13,12 @@ namespace NutriAnimal.Data.Models
 
         public string Description { get; set; }
 
+        public string CategoryId { get; set; }
+
         public Category Category { get; set; }
 
+        public string OrderId { get; set; }
+
         public Order Order { get; set; }
-
-
     }
 }
