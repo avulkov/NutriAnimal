@@ -24,6 +24,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System.Threading.Tasks;
+    using System.Linq;
 
     public class Startup
     {
@@ -113,22 +115,21 @@
 
                 if (env.IsDevelopment())
                 {
-                    dbContext.Database.Migrate();
+                    dbContext.Database.EnsureCreated();
                 }
 
+               
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+
+
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

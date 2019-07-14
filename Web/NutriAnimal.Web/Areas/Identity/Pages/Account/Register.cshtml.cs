@@ -12,6 +12,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
+    using System.Linq;
+    using NutriAnimal.Data;
 
     [AllowAnonymous]
 #pragma warning disable SA1649 // File name should match first type name
@@ -22,17 +24,19 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly ApplicationDbContext dbContext;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,ApplicationDbContext dbContext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.dbContext = dbContext;
         }
 
         [BindProperty]
@@ -55,6 +59,14 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
+                    if (this.dbContext.Users.Count() == 1)
+                    {
+                        await this.userManager.AddToRoleAsync(user, "Administrator");
+                    }
+                    else
+                    {
+                        await this.userManager.AddToRoleAsync(user, "User");
+                    }
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = this.Url.Page(
@@ -84,7 +96,10 @@
 
         public class InputModel
         {
-           
+            [Required]
+            [Display(Name = "Username")]
+            public string  Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -100,6 +115,14 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "FullName")]
+            public string FullName { get; set; }
         }
     }
 }
