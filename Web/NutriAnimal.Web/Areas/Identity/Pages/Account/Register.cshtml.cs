@@ -96,9 +96,7 @@
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Username")]
-            public string  Username { get; set; }
+           
 
             [Required]
             [EmailAddress]
