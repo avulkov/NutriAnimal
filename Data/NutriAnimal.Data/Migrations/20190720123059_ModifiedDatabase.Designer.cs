@@ -10,8 +10,8 @@ using NutriAnimal.Data;
 namespace NutriAnimal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190705163211_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20190720123059_ModifiedDatabase")]
+    partial class ModifiedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,6 +160,8 @@ namespace NutriAnimal.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FullName");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("LockoutEnabled");
@@ -204,9 +206,8 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -215,21 +216,114 @@ namespace NutriAnimal.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("NutriAnimal.Data.Models.Product", b =>
+            modelBuilder.Entity("NutriAnimal.Data.Models.Delivery", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CategoryId");
+                    b.Property<string>("DeliveryCompanyId");
+
+                    b.Property<string>("DeliveryTypeId");
+
+                    b.Property<string>("OrderId");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("RecipientId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryCompanyId");
+
+                    b.HasIndex("DeliveryTypeId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("RecipientId");
+
+                    b.ToTable("Deliveries");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.DeliveryCompany", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<decimal>("PricePerDelivery");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryCompanies");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.DeliveryType", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryTypes");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("DeliveryCompanyId");
+
+                    b.Property<string>("OrderedById");
+
+                    b.Property<DateTime>("OrderedOn");
+
+                    b.Property<string>("StatusId");
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.Property<double>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryCompanyId");
+
+                    b.HasIndex("OrderedById");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.Product", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("OrderId");
+
                     b.Property<decimal>("Price");
+
+                    b.Property<double>("Weight");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -257,6 +351,18 @@ namespace NutriAnimal.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.Status", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -304,12 +410,49 @@ namespace NutriAnimal.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("NutriAnimal.Data.Models.Delivery", b =>
+                {
+                    b.HasOne("NutriAnimal.Data.Models.DeliveryCompany", "DeliveryCompany")
+                        .WithMany()
+                        .HasForeignKey("DeliveryCompanyId");
+
+                    b.HasOne("NutriAnimal.Data.Models.DeliveryType", "DeliveryType")
+                        .WithMany()
+                        .HasForeignKey("DeliveryTypeId");
+
+                    b.HasOne("NutriAnimal.Data.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "Recipient")
+                        .WithMany()
+                        .HasForeignKey("RecipientId");
+                });
+
+            modelBuilder.Entity("NutriAnimal.Data.Models.Order", b =>
+                {
+                    b.HasOne("NutriAnimal.Data.Models.DeliveryCompany", "DeliveryCompany")
+                        .WithMany()
+                        .HasForeignKey("DeliveryCompanyId");
+
+                    b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "OrderedBy")
+                        .WithMany("Orders")
+                        .HasForeignKey("OrderedById");
+
+                    b.HasOne("NutriAnimal.Data.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+                });
+
             modelBuilder.Entity("NutriAnimal.Data.Models.Product", b =>
                 {
                     b.HasOne("NutriAnimal.Data.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("NutriAnimal.Data.Models.Order", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

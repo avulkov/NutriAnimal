@@ -54,7 +54,7 @@
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
+                var user = new ApplicationUser { UserName = this.Input.FullName, Email = this.Input.Email,PhoneNumber=this.Input.PhoneNumber,FullName=this.Input.FullName };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
@@ -115,11 +115,11 @@
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "PhoneNumber")]
+            [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
             [Required]
-            [Display(Name = "FullName")]
+            [Display(Name = "Full Name")]
             public string FullName { get; set; }
         }
     }

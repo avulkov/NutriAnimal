@@ -11,6 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190705163211_InitialCreate2.cs" />
+    <Compile Remove="Migrations\20190705163211_InitialCreate2.Designer.cs" />
+    <Compile Remove="Migrations\20190705180350_InitialCreateWithEverything.cs" />
+    <Compile Remove="Migrations\20190705180350_InitialCreateWithEverything.Designer.cs" />
+    <Compile Remove="Migrations\20190705181244_InitialCreateWithEverythingInside.cs" />
+    <Compile Remove="Migrations\20190705181244_InitialCreateWithEverythingInside.Designer.cs" />
+    <Compile Remove="Migrations\20190706093342_DatabaseAfterCorrections.cs" />
+    <Compile Remove="Migrations\20190706093342_DatabaseAfterCorrections.Designer.cs" />
+    <Compile Remove="Migrations\20190706093923_DatabaseAfterCorrectionsOfDelivery.cs" />
+    <Compile Remove="Migrations\20190706093923_DatabaseAfterCorrectionsOfDelivery.Designer.cs" />
+    <Compile Remove="Migrations\20190713101035_CorrectionInDatabase.cs" />
+    <Compile Remove="Migrations\20190713101035_CorrectionInDatabase.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 

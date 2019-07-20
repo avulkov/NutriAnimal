@@ -28,6 +28,10 @@ namespace NutriAnimal.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public string FullName { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

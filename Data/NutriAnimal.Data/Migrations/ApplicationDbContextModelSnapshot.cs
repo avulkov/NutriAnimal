@@ -158,6 +158,8 @@ namespace NutriAnimal.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FullName");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("LockoutEnabled");
@@ -432,7 +434,7 @@ namespace NutriAnimal.Data.Migrations
                         .HasForeignKey("DeliveryCompanyId");
 
                     b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "OrderedBy")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("OrderedById");
 
                     b.HasOne("NutriAnimal.Data.Models.Status", "Status")
