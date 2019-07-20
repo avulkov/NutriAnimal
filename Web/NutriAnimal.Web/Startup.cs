@@ -26,6 +26,7 @@
     using Microsoft.Extensions.Logging;
     using System.Threading.Tasks;
     using System.Linq;
+    using NutriAnimal.Services.Category;
 
     public class Startup
     {
@@ -101,6 +102,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
