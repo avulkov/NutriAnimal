@@ -1,0 +1,83 @@
+﻿@using NutriAnimal.Web.ViewModels.Category;
+@model NutriAnimal.Web.ViewModels.Product.CreateProductInputModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Create product</h1>
+
+<div class="container-fluid rounded w-50 ">
+    <div class="row bg-light mt-3">
+        <div class="col-md-12">
+            <form method="post" class=" mx-auto">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <div class="form-group">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Name" class="font-weight-bold"></label>
+                        </div>
+                        <input asp-for="Name" class="form-control shadow p-3 mb-2 bg-white rounded" type="text" placeholder="Name..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Category" class="font-weight-bold"></label>
+                        </div>
+
+
+                        <select asp-for="Category" class="browser-default p-2  shadow  mb-2  rounded " >
+                            <option selected disabled>Categories</option>
+                            @foreach (var category in (IEnumerable<CreateCategoryInputModel>)this.ViewData["categories"])
+                            {
+                                <option value="@category.Name">@category.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+
+                    </div>
+                </div>
+                
+
+                <div class="form-group ">
+                    <div class="d-flex justify-content-center ">
+                        <label asp-for="Description" class="font-weight-bold"></label>
+                    </div>
+                    <textarea asp-for="Description" class="form-control shadow p-3 mb-2 bg-white rounded" rows="3" placeholder="Description..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                
+                <div class="d-flex justify-content-between">
+                    <div class="form-group ">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Weight" class="font-weight-bold"></label>
+                        </div>
+                        <input asp-for="Weight" class="form-control shadow p-3 mb-2 bg-white rounded" type="number" step="0.1" placeholder="Weight..." />
+                        <span asp-validation-for="Weight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Price" class="font-weight-bold"></label>
+                        </div>
+                        <input asp-for="Price" class="form-control shadow p-3 mb-2 bg-white rounded" type="number" step="0.1" placeholder="Price..." />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn bg-info mb-3 ">Create Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

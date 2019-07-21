@@ -10,5 +10,6 @@ namespace NutriAnimal.Services.Category
 
     {
         Task<bool> CreateAsync(CreateCategoryInputModel model);
+
     }
 }

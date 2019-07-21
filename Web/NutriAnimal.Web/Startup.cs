@@ -27,6 +27,7 @@
     using System.Threading.Tasks;
     using System.Linq;
     using NutriAnimal.Services.Category;
+    using NutriAnimal.Services.Product;
 
     public class Startup
     {
@@ -103,6 +104,7 @@
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,19 +121,14 @@
                 {
                     dbContext.Database.EnsureCreated();
                 }
-
-               
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
-
 
             app.UseDeveloperExceptionPage();
             app.UseDatabaseErrorPage();
 
-
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
-
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

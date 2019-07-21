@@ -17,6 +17,7 @@
 
         public Category Category { get; set; }
 
+        //TODO maybe remove this !!!
         public string OrderId { get; set; }
 
         public Order Order { get; set; }
