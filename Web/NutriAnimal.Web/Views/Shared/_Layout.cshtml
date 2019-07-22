@@ -35,18 +35,21 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">My Orders</a>
                                 </li>
 
-
                                 <li>
-                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Category" asp-action="Create" >Add category</a>
-                                </li>
-                                
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-success text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Admin Panel
+                                        </button>
+                                        <div class="dropdown-menu bg-warning font-weight-bold  text-warning"    >
+                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Category" asp-action="Create">Add category</a>
+                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
+                                            <a class="nav-link text-dark ml-2" asp-area="" asp-controller="DeliveryCompany" asp-action="Create">Delivery Companies</a>
 
-                                <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
+
+                                        </div>
+                                    </div>
                                 </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="DeliveryCompany" asp-action="Create">Delivery Companies</a>
-                                </li>
+
 
                             </ul>
 
@@ -58,7 +61,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/"  , new { area=string.Empty }))">
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" , new { area=string.Empty }))">
                                         <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                                     </form>
                                 </li>

@@ -17,11 +17,10 @@
 
         public Category Category { get; set; }
 
-        //TODO maybe remove this !!!
-        public string OrderId { get; set; }
+        public string Picture { get; set; }
 
-        public Order Order { get; set; }
+        public string Brand { get; set; }
 
-        
+
     }
 }
