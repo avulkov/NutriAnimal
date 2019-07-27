@@ -8,6 +8,7 @@
     <environment names="Development">
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+
     </environment>
     <environment names="Staging,Production">
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
@@ -16,7 +17,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3 rounded">
             @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
             {
                 <div class="container">
@@ -43,7 +44,7 @@
                                         <div class="dropdown-menu bg-warning font-weight-bold  text-warning"    >
                                             <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Category" asp-action="Create">Add category</a>
                                             <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
-                                            <a class="nav-link text-dark ml-2" asp-area="" asp-controller="DeliveryCompany" asp-action="Create">Delivery Companies</a>
+                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
 
 
                                         </div>
@@ -147,7 +148,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-center bg-success">
+    <footer class="border-top footer text-center bg-success rounded">
         <div class="container">
             &copy; @DateTime.Now.Year - NutriAnimal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

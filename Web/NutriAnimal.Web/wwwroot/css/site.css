@@ -59,3 +59,15 @@ body {
 .shadow-textarea textarea.form-control {
     padding-left: 0.8rem;
 }
+.nutri-border{
+    border:2px solid;
+    
+}
+.nutri-empty-div{
+    content:'.';
+    visibility:hidden
+}
+.nutri-hr {
+    border: 2px solid green;
+    border-radius: 2px;
+}

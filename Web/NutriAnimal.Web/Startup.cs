@@ -28,6 +28,7 @@
     using System.Linq;
     using NutriAnimal.Services.Category;
     using NutriAnimal.Services.Product;
+    using NutriAnimal.Services.DeliveyCompanies;
 
     public class Startup
     {
@@ -105,6 +106,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IDeliveryCompanyService, DeliveryCompanyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

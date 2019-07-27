@@ -41,7 +41,7 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
                     Name = category.Name,
                 })
                .ToList();
-                return this.View();
+                return this.View(); 
             }
 
             var product = new CreateProductInputModel

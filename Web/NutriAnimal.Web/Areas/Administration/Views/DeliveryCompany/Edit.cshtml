@@ -1,0 +1,45 @@
+﻿@model NutriAnimal.Data.Models.DeliveryCompany;
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Edit</h1>
+
+
+<div class="container-fluid justify-content-center w-50 bg-light ">
+    <div class="row bg-light  nutri-border border-info rounded ">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <div class="d-flex justify-content-center mt-3">
+                        <label asp-for="Name" class="font-weight-bold"></label>
+                    </div>
+                    <input asp-for="Name" class="form-control font-weight-bold text-center shadow p-3 mb-2 bg-white rounded" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+                    <div class="d-flex justify-content-center ">
+                        <label asp-for="Description" class="font-weight-bold"></label>
+                    </div>
+                    <textarea asp-for="Description" class="form-control shadow p-3 mb-2 bg-white rounded" rows="3" placeholder="Description..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn bg-success mb-3 ">Edit Company</button>
+                    <a type="button" href="/Administration/DeliveryCompany/All" class="btn bg-info mb-3 ">Back</a>
+                </div>
+
+
+                   
+
+              
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
