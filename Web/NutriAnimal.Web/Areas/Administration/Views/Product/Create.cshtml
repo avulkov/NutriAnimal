@@ -12,7 +12,7 @@
 <div class="container-fluid rounded w-50 ">
     <div class="row nutri-border  bg-light mt-3  border-info p-3 rounded ">
         <div class="col-md-12">
-            <form method="post" class=" mx-auto">
+            <form method="post" class=" mx-auto" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="d-flex justify-content-between mt-3">
@@ -29,7 +29,7 @@
                         </div>
 
 
-                        <select asp-for="Category" class="browser-default p-2  shadow  mb-2  rounded " >
+                        <select asp-for="Category" class="browser-default p-2  shadow  mb-2  rounded ">
                             <option selected disabled>Categories</option>
                             @foreach (var category in (IEnumerable<CreateCategoryInputModel>)this.ViewData["categories"])
                             {
@@ -55,6 +55,28 @@
                         <input asp-for="Price" class="form-control shadow p-3 mb-2 bg-white rounded" type="number" step="0.1" placeholder="Price..." />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
+                    
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="form-group w-50 ">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Picture" class="font-weight-bold"></label>
+                        </div>
+                        <input type="file"
+                               class="form-control text-dark text-center"
+                               id="picture"
+                               placeholder="Picture..."
+                               asp-for="Picture">
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <div class="d-flex justify-content-center">
+                            <label asp-for="Brand" class="font-weight-bold"></label>
+                        </div>
+                        <input asp-for="Brand" class="form-control  shadow p-3 mb-2 bg-white rounded" type="text" placeholder="Brand ..." />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+
                 </div>
 
                 <div class="form-group ">
@@ -66,9 +88,9 @@
                 </div>
 
 
-                
-                
-                
+
+
+
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn bg-info mb-3 ">Create Product</button>
                 </div>

@@ -17,5 +17,11 @@ namespace NutriAnimal.Web.Areas.Administration.ViewModels.Product
         public double Weight { get; set; }
 
         public decimal Price { get; set; }
+
+        public string Brand { get; set; }
+
+        public string  Picture { get; set; }
+
+
     }
 }

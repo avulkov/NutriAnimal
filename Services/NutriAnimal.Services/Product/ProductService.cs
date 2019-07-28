@@ -19,7 +19,7 @@ namespace NutriAnimal.Services.Product
             this.context = context;
         }
 
-        public async Task<bool> Create(CreateProductInputModel inputModel)
+        public async Task<bool> Create(CreateProductServiceModel inputModel)
         {
             var categoryFromDb = this.context.Categories.FirstOrDefault(category => category.Name == inputModel.Category);
             var product = new NutriAnimal.Data.Models.Product
@@ -28,6 +28,8 @@ namespace NutriAnimal.Services.Product
                 Weight = inputModel.Weight,
                 Price = inputModel.Price,
                 Description = inputModel.Description,
+                Brand=inputModel.Brand,
+                Picture = inputModel.Picture
 
 
             };
@@ -70,6 +72,8 @@ namespace NutriAnimal.Services.Product
                 Weight = productFromDb.Weight,
                 Category = productFromDb.Category.Name,
                 Name = productFromDb.Name,
+                Brand=productFromDb.Brand,
+                Picture=null,
             };
             return result;
         }

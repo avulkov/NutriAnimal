@@ -29,6 +29,8 @@
     using NutriAnimal.Services.Category;
     using NutriAnimal.Services.Product;
     using NutriAnimal.Services.DeliveyCompanies;
+    using CloudinaryDotNet;
+    using NutriAnimal.Services;
 
     public class Startup
     {
@@ -46,6 +48,19 @@
             // TODO: Add pooling when this bug is fixed: https://github.com/aspnet/EntityFrameworkCore/issues/9741
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+
+            Account cloudinaryCredentials = new Account
+            (
+                this.configuration["Cloudinary:CloudName"],
+                 this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:ApiSecret"]
+               
+
+            );
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
 
             services
                 .AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -107,6 +122,7 @@
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IDeliveryCompanyService, DeliveryCompanyService>();
+            services.AddTransient<ICLoudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

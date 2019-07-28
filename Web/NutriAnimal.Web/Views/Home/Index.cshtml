@@ -1,4 +1,4 @@
-﻿@model List<NutriAnimal.Web.ViewModels.Product.CreateProductInputModel>
+﻿@model List<NutriAnimal.Web.ViewModels.Product.ProductHomeViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -23,7 +23,7 @@
                         <div class="col-md-4">
                             <div class="image-holder d-flex justify-content-center">
 
-                                <img class="img-thumbnail " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BA2_hLsMp78iqtZZiCvIfQksNlI2KQqhWZCsUhqxwKoMDy6F6A" alt="...">
+                                <img class="img-thumbnail " src="@Model[j].Picture">
 
                             </div>
                             <p>@Model[j].Name</p>
