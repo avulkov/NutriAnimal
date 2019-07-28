@@ -48,16 +48,17 @@ namespace NutriAnimal.Services.Product
             });
         }
 
-        public IQueryable<CreateProductInputModel> GetAllProducts()
+        public IQueryable<ProductHomeViewModel> GetAllProducts()
         {
-            return this.context.Products.Select(product => new CreateProductInputModel
+            return this.context.Products.Select(product => new ProductHomeViewModel
             {
                 Id = product.Id,
-                Category = product.Category.Name,
+               
                 Name = product.Name,
-                Description = product.Description,
+               
                 Price = product.Price,
-                Weight = product.Weight,
+                Picture=product.Picture
+                
             });
         }
 

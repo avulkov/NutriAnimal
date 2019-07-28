@@ -48,14 +48,14 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
             }
 
             string pictureUrl = await this.cLoudinaryService.UploadPicture(productModel.Picture,productModel.Name);
-            var product = new CreateProductInputModel
+            var product = new CreateProductServiceModel
             {
                 Name = productModel.Name,
                 Weight = productModel.Weight,
                 Price = productModel.Price,
                 Description = productModel.Description,
                 Category = productModel.Category,
-                Picture=productModel.Picture,
+                Picture= pictureUrl,
                 Brand=productModel.Brand,
             };
 

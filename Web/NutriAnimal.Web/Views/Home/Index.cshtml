@@ -6,52 +6,57 @@
 }
 
 
-<div class="jumbotron  rounded w-75 pb-3 container-fluid">
+    <div class="jumbotron  rounded w-75 pb-3 container-fluid">
 
-    <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
-    <h3 class="text-center ">The best store for nutrition supplements.</h3>
-    <hr class="nutri-hr">
-    @if (this.User.Identity.IsAuthenticated)
-    {
-        for (int i = 0; i < Model.Count(); i += 3)
+        <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
+        <h3 class="text-center ">The best store for nutrition supplements.</h3>
+        <hr class="nutri-hr">
+        @if (this.User.Identity.IsAuthenticated)
         {
-            <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
-                @for (int j = i; j < i + 3; j++)
-                {
-                    if (j < Model.Count())
+            for (int i = 0; i < Model.Count(); i += 3)
+            {
+                <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
+                    @for (int j = i; j < i + 3; j++)
                     {
-                        <div class="col-md-4">
-                            <div class="image-holder d-flex justify-content-center">
+                        if (j < Model.Count())
+                        {
+                            <div class="col-md-4">
+                                <div class="image-holder d-flex justify-content-center">
 
-                                <img class="img-thumbnail " src="@Model[j].Picture">
+                                    <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
+
+                                </div>
+                                <p>@Model[j].Name</p>
+                                <div>
+                                    <a asp-action="Details" asp-route-id="@Model[j].Id" class="btn btn-info">
+                                        Details
+                                    </a>
+                                </div>
 
                             </div>
-                            <p>@Model[j].Name</p>
-                            <div>
-                                <a  asp-action="Details" asp-route-id="@Model[j].Id" class="btn btn-info">
-                                    Details
-                                </a>
+
+                        }
+                        else
+                        {
+                            <div class="nutri-empty-div col-md-4">
                             </div>
-
-                        </div>
-
+                        }
                     }
-                    else
-                    {
-                        <div class="nutri-empty-div col-md-4">
-                        </div>
-                    }
-                }
 
-            </div>
-            <hr class="nutri-hr">
+                </div>
+                <hr class="nutri-hr">
+            }
+
+        }
+        else
+        {
+            <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
+            <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
         }
 
-    }
 
 
 
 
 
-
-</div>
+    </div>

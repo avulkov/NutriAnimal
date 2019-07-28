@@ -13,9 +13,9 @@ namespace NutriAnimal.Services.Product
     {
         IQueryable<CreateCategoryInputModel> GetAllCategories();
         CreateProductInputModel GetProductById(string id);
-        IQueryable<CreateProductInputModel> GetAllProducts();
+        IQueryable<ProductHomeViewModel> GetAllProducts();
 
-        Task<bool> Create(CreateProductInputModel inputModel);
+        Task<bool> Create(CreateProductServiceModel inputModel);
 
       
     }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NutriAnimal.Web.ViewModels.Product
 {
-    public class ProductHomeViewModel
+    public class CreateProductInputModel
     {
         public string Id { get; set; }
 

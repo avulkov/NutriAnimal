@@ -71,3 +71,7 @@ body {
     border: 2px solid green;
     border-radius: 2px;
 }
+.nutri-image {
+    width: 300px;
+    height: 200px;
+}
