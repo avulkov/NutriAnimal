@@ -19,7 +19,7 @@ namespace NutriAnimal.Web.Controllers
         [HttpGet]
         public IActionResult Details(string id)
         {
-            CreateProductInputModel product = this.productService.GetProductById(id);
+            ProductDetailsViewModel product = this.productService.GetProductById(id);
 
             return this.View(product);
         }

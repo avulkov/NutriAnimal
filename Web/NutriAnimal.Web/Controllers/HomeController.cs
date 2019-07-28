@@ -15,9 +15,10 @@
         }
         public IActionResult Index()
         {
-            var categories = this.productService.GetAllCategories();
+            
             var products = this.productService.GetAllProducts().Select(product => new ProductHomeViewModel
             {
+                Id=product.Id,
                 Name = product.Name,
                 Price = product.Price,
                 Picture=product.Picture,

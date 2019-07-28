@@ -28,7 +28,7 @@ namespace NutriAnimal.Services.Product
                 Weight = inputModel.Weight,
                 Price = inputModel.Price,
                 Description = inputModel.Description,
-                Brand=inputModel.Brand,
+                Brand = inputModel.Brand,
                 Picture = inputModel.Picture
 
 
@@ -53,28 +53,26 @@ namespace NutriAnimal.Services.Product
             return this.context.Products.Select(product => new ProductHomeViewModel
             {
                 Id = product.Id,
-               
+                Brand = product.Brand,
                 Name = product.Name,
-               
                 Price = product.Price,
-                Picture=product.Picture
-                
+                Picture = product.Picture,
+
             });
         }
 
-        public CreateProductInputModel GetProductById(string id)
+        public ProductDetailsViewModel GetProductById(string id)
         {
             var productFromDb = this.context.Products.FirstOrDefault(product => product.Id == id);
-            CreateProductInputModel result = new CreateProductInputModel
+            ProductDetailsViewModel result = new ProductDetailsViewModel
             {
                 Id = productFromDb.Id,
                 Price = productFromDb.Price,
                 Description = productFromDb.Description,
                 Weight = productFromDb.Weight,
-                Category = productFromDb.Category.Name,
                 Name = productFromDb.Name,
+                Picture = productFromDb.Picture,
                 Brand=productFromDb.Brand,
-                Picture=null,
             };
             return result;
         }

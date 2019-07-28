@@ -1,38 +1,51 @@
-﻿@model NutriAnimal.Web.ViewModels.Product.CreateProductInputModel
+﻿@model NutriAnimal.Web.ViewModels.Product.ProductDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Details</h1>
 
-<div class="jumbotron bg-success rounded w-75 pb-3 container-fluid ">
 
-    <h1 class="display-4 text-center">@Model.Name</h1>
+<div class="jumbotron bg-light nutri-border border-info rounded w-75 pb-3 container-fluid ">
 
-    <hr />
-    <div class="d-sm-inline-flex ">
+    <h1 class="display-4 text-center font-weight-bolder">@Model.Name</h1>
+
+    <hr class="nutri-hr" />
+    <div class="d-sm-inline-flex d-flex justify-content-around ">
 
         <div class="d-flex flex-row flex-grow-1 ">
 
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_dBQaAfxHEJd7smPWNxb4yReFSO5BEoSp8h2MSAz9ApTT07LQ_A">
+            <img src="@Model.Picture">
 
         </div>
 
-        <div class="d-flex flex-row-reverse flex-grow-1 pl-5">
-            <ul class="list-unstyled">
-                <li> <p>@Model.Description</p></li>
-                <li><h6>Price: @Model.Price lv.</h6></li>
-                <li><h6>Weight: @Model.Weight kg.</h6></li>
-                <button type="button" class="btn btn-secondary">Buy</button>
-                <button type="button" class="btn btn-secondary">Back</button>
+        <div class="d-flex flex-row-reverse flex-grow-1 pl-5 ">
+            <div>
+                <p>@Model.Description</p>
+                <ul class="list-unstyled">
 
-            </ul>
+                    <li><h6>Price: $@Model.Price </h6></li>
+                    <li><h6>Weight: @Model.Weight kg.</h6></li>
+                    <li><h6>Brand: @Model.Brand</h6></li>
+
+
+                </ul>
+
+            </div>
+
         </div>
     </div>
 
-    <hr />
+    <hr class="nutri-hr" />
+    <div>
+        <button type="button" class="btn btn-info">Buy</button>
+        <a href="/" class="btn btn-warning">Back</a>
+        @if(this.User.IsInRole("Administrator"))
+        {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-danger">Edit</a>
+        }
+    </div>
 
 
 </div>

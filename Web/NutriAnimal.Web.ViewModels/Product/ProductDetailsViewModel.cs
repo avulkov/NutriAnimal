@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NutriAnimal.Web.ViewModels.Product
 {
-    public class ProductHomeViewModel
+    public class ProductDetailsViewModel
     {
         public string Id { get; set; }
 
@@ -14,7 +14,10 @@ namespace NutriAnimal.Web.ViewModels.Product
 
         public decimal Price { get; set; }
 
-        public string Brand { get; set; }
+        public double Weight { get; set; }
 
+        public string Description { get; set; }
+
+        public string Brand { get; set; }
     }
 }
