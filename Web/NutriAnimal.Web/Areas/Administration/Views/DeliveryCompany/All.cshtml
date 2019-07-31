@@ -27,26 +27,29 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Where(x=>x.IsDeleted==false))
+            @foreach (var item in Model)
             {
-            <tr>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn bg-warning">Edit</a>
-                </td>
-                <td>
+                @if (item.IsDeleted == false)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn bg-warning">Edit</a>
+                        </td>
+                        <td>
 
 
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn bg-danger">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn bg-danger">Delete</a>
 
-                </td>
-            </tr>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

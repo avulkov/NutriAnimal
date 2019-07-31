@@ -25,11 +25,13 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                var allCompanies = await this.service.GetAllDeliveryCompanies().Select(deliveryCompany => new CreateDeliveryCompanyViewModel
+                var allCompanies = await this.service.GetAllDeliveryCompanies()
+                    .Where(company=>company.IsDeleted!=true).Select(deliveryCompany => new CreateDeliveryCompanyViewModel
                 {
                     Id = deliveryCompany.Id,
                     Name = deliveryCompany.Name,
                     Description = deliveryCompany.Description,
+                
                 }).ToListAsync();
                 return this.View(allCompanies);
             }
@@ -77,11 +79,16 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
 
             return this.Redirect("/Administration/DeliveryCompany/All");
         }
+
+        public async Task<IActionResult> Delete()
+        {
+            return this.View();
+        }
         [HttpPost]
-        public async Task<IActionResult> Delete(EditDeliveryCompanyInputModel companyToEdit)
+        public async Task<IActionResult> Delete(string id)
         {
             
-            await this.service.Delete(companyToEdit);
+            await this.service.Delete(id);
 
             return this.Redirect("/Administration/DeliveryCompany/All");
         }

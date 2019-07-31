@@ -14,6 +14,6 @@ namespace NutriAnimal.Services.DeliveyCompanies
         Task<bool> CreateDeliveryCompany(CreateDeliveryCompanyInputModel deliveryCompanyInputModel);
         Task<bool> Edit(EditDeliveryCompanyInputModel companyToEdit);
         DeliveryCompany GetDeliveryCompanyById(string id);
-        Task<bool> Delete(EditDeliveryCompanyInputModel companyToEdit);
+        Task<bool> Delete(string id);
     }
 }

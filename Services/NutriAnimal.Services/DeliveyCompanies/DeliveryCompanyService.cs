@@ -25,8 +25,9 @@ namespace NutriAnimal.Services.DeliveyCompanies
         {
             var deliveryCompany = new DeliveryCompany
             {
-                Name=deliveryCompanyInputModel.Name,
-                Description=deliveryCompanyInputModel.Description,
+                Name = deliveryCompanyInputModel.Name,
+                Description = deliveryCompanyInputModel.Description,
+                IsDeleted = false,
             };
 
             this.context.DeliveryCompanies.Add(deliveryCompany);
@@ -34,10 +35,10 @@ namespace NutriAnimal.Services.DeliveyCompanies
             return result > 0;
         }
         //TODO: Need to be fixed
-        public async Task<bool> Delete(EditDeliveryCompanyInputModel companyToEdit)
+        public async Task<bool> Delete(string id)
         {
-            var companyToDelete = this.GetDeliveryCompanyById(companyToEdit.Id);
-            companyToDelete.IsDeleted = companyToEdit.IsDeleted;
+            var companyToDelete = this.GetDeliveryCompanyById(id);
+            companyToDelete.IsDeleted = true ;
             this.context.DeliveryCompanies.Update(companyToDelete);
             var result = await this.context.SaveChangesAsync();
             return result > 0;
@@ -65,6 +66,7 @@ namespace NutriAnimal.Services.DeliveyCompanies
                 Id=deliveryCompany.Id,
                 Name = deliveryCompany.Name,
                 Description = deliveryCompany.Description,
+                IsDeleted=deliveryCompany.IsDeleted,
             });
             return allCompanies;
         }
