@@ -13,53 +13,60 @@
     <hr class="nutri-hr">
     @if (this.User.Identity.IsAuthenticated)
     {
-        for (int i = 0; i < Model.Count(); i += 3)
+
+        @for (int i = 0; i < Model.Count(); i += 3)
         {
-            <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
-                @for (int j = i; j < i + 3; j++)
-                {
-                    if (j < Model.Count())
-                    {
-                        <div class="col-md-4">
+<div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
+    @for (int j = i; j < i + 3; j++)
+    {
 
-                            <div class="image-holder d-flex justify-content-center">
+        if (j < Model.Count())
+        {
+            
+                <div class="col-md-4">
 
-                                <a href="/Product/Details/@Model[j].Id" class="btn ">
-                                    <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
-                                </a>
+                    <div class="image-holder d-flex justify-content-center">
 
-
-                            </div>
-
-                            <div>
-                                <a href="/Product/Details/@Model[j].Id" class="text-center">
-                                    
-                                    <ul class="list-unstyled font-weight-bold text-info">
-
-                                        <li>
-                                            @Model[j].Name
-                                        </li>
-                                        <li>
-                                            $ @Model[j].Price
-                                        </li>
-                                    </ul>
-                                    
-                                </a>
-                            </div>
+                        <a href="/Product/Details/@Model[j].Id" class="btn ">
+                            <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
+                        </a>
 
 
+                    </div>
 
-                        </div>
+                    <div>
+                        <a href="/Product/Details/@Model[j].Id" class="text-center">
 
-                    }
-                    else
-                    {
-                        <div class="nutri-empty-div col-md-4">
-                        </div>
-                    }
-                }
+                            <ul class="list-unstyled font-weight-bold text-info">
 
+                                <li>
+                                    @Model[j].Name
+                                </li>
+                                <li>
+                                    $ @Model[j].Price
+                                </li>
+                            </ul>
+
+                        </a>
+                    </div>
+
+
+
+                </div>
+            
+
+
+        }
+        else
+        {
+            <div class="nutri-empty-div col-md-4">
             </div>
+        }
+
+
+    }
+
+</div>
             <hr class="nutri-hr">
         }
 

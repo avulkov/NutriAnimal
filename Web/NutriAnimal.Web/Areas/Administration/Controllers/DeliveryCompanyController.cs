@@ -80,7 +80,7 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
             return this.Redirect("/Administration/DeliveryCompany/All");
         }
 
-        public async Task<IActionResult> Delete()
+        public IActionResult Delete()
         {
             return this.View();
         }

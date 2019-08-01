@@ -21,6 +21,8 @@
 
         public string Brand { get; set; }
 
+        public bool IsDeleted { get; set; }
+
 
     }
 }

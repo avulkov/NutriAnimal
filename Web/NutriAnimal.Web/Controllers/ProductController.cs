@@ -17,9 +17,10 @@ namespace NutriAnimal.Web.Controllers
             this.productService = productService;
         }
         [HttpGet]
+        
         public IActionResult Details(string id)
         {
-            ProductDetailsViewModel product = this.productService.GetProductById(id);
+            var  product = this.productService.GetProductById(id);
 
             return this.View(product);
         }

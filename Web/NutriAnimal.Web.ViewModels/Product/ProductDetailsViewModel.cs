@@ -19,5 +19,9 @@ namespace NutriAnimal.Web.ViewModels.Product
         public string Description { get; set; }
 
         public string Brand { get; set; }
+
+        public string Category { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

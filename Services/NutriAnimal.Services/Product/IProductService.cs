@@ -12,11 +12,17 @@ namespace NutriAnimal.Services.Product
     public interface IProductService
     {
         IQueryable<CreateCategoryInputModel> GetAllCategories();
+
         ProductDetailsViewModel GetProductById(string id);
+
         IQueryable<ProductHomeViewModel> GetAllProducts();
 
         Task<bool> Create(CreateProductServiceModel inputModel);
 
-      
+        Task<bool> Edit(CreateProductInputModel modelToEdit,string pictureUrl);
+
+        Task<bool> Delete(string id);
+
+
     }
 }

@@ -39,5 +39,7 @@ namespace NutriAnimal.Web.ViewModels.Product
       
         [Display(Name = "Picture")]
         public IFormFile Picture { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

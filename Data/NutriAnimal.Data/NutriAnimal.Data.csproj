@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20190706093923_DatabaseAfterCorrectionsOfDelivery.Designer.cs" />
     <Compile Remove="Migrations\20190713101035_CorrectionInDatabase.cs" />
     <Compile Remove="Migrations\20190713101035_CorrectionInDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20190801114143_IsDeletedAddedToProduct.cs" />
+    <Compile Remove="Migrations\20190801114143_IsDeletedAddedToProduct.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

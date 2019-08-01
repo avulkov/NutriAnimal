@@ -22,8 +22,9 @@
                 Name = product.Name,
                 Price = product.Price,
                 Picture=product.Picture,
+               
             }).ToList();
-             
+           
             return this.View(products);
         }
         

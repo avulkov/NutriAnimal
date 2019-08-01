@@ -34,7 +34,7 @@ namespace NutriAnimal.Services.DeliveyCompanies
             var result = await this.context.SaveChangesAsync();
             return result > 0;
         }
-        //TODO: Need to be fixed
+
         public async Task<bool> Delete(string id)
         {
             var companyToDelete = this.GetDeliveryCompanyById(id);
@@ -44,16 +44,12 @@ namespace NutriAnimal.Services.DeliveyCompanies
             return result > 0;
         }
 
-        //TODO CHECK HOW TO FIX THIS METHOD 
         public async Task<bool> Edit(EditDeliveryCompanyInputModel companyToEdit)
         {
-            
             var company = this.GetDeliveryCompanyById(companyToEdit.Id);
 
             company.Name = companyToEdit.Name;
             company.Description = companyToEdit.Description;
-            
-            
             this.context.DeliveryCompanies.Update(company);
             var result = await this.context.SaveChangesAsync();
             return result > 0;
@@ -74,9 +70,7 @@ namespace NutriAnimal.Services.DeliveyCompanies
         public DeliveryCompany GetDeliveryCompanyById(string id)
         {
           var companyFromDb = this.context.DeliveryCompanies.SingleOrDefault(company => company.Id == id);
-            return companyFromDb;
+          return companyFromDb;
         }
-
-       
     }
 }

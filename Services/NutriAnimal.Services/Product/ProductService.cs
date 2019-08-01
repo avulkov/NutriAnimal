@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using NutriAnimal.Data;
 using NutriAnimal.Web.ViewModels.Category;
 using NutriAnimal.Web.ViewModels.Product;
+using NutriAnimal.Data.Models;
 
 namespace NutriAnimal.Services.Product
 {
@@ -29,7 +30,8 @@ namespace NutriAnimal.Services.Product
                 Price = inputModel.Price,
                 Description = inputModel.Description,
                 Brand = inputModel.Brand,
-                Picture = inputModel.Picture
+                Picture = inputModel.Picture,
+              
 
 
             };
@@ -38,6 +40,40 @@ namespace NutriAnimal.Services.Product
             var result = await this.context.SaveChangesAsync();
             return result > 0;
 
+        }
+
+        public async Task<bool> Delete(string id)
+        {
+            var productToDelete = this.context.Products.SingleOrDefault(x => x.Id == id);
+            productToDelete.IsDeleted = true;
+
+
+            this.context.Products.Update(productToDelete);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
+
+        public async Task<bool> Edit(CreateProductInputModel modelToEdit, string pictureUrl)
+        {
+            var productFromDb = this.context.Products.SingleOrDefault(product => product.Id == modelToEdit.Id);
+            var categoryFromDb = this.context.Categories.SingleOrDefault(category => category.Id == productFromDb.CategoryId);
+
+            productFromDb.Name = modelToEdit.Name;
+            productFromDb.Weight = modelToEdit.Weight;
+            productFromDb.Description = modelToEdit.Description;
+            productFromDb.Brand = modelToEdit.Brand;
+            productFromDb.Price = modelToEdit.Price;
+            productFromDb.Category = categoryFromDb;
+            if (modelToEdit.Picture != null)
+            {
+                productFromDb.Picture = pictureUrl;
+
+            }
+
+            this.context.Products.Update(productFromDb);
+            int result = await this.context.SaveChangesAsync();
+
+            return result > 0;
         }
 
         public IQueryable<CreateCategoryInputModel> GetAllCategories()
@@ -50,7 +86,7 @@ namespace NutriAnimal.Services.Product
 
         public IQueryable<ProductHomeViewModel> GetAllProducts()
         {
-            return this.context.Products.Select(product => new ProductHomeViewModel
+            return this.context.Products.Where(x=>x.IsDeleted!=true).Select(product => new ProductHomeViewModel
             {
                 Id = product.Id,
                 Brand = product.Brand,
@@ -63,17 +99,24 @@ namespace NutriAnimal.Services.Product
 
         public ProductDetailsViewModel GetProductById(string id)
         {
-            var productFromDb = this.context.Products.FirstOrDefault(product => product.Id == id);
-            ProductDetailsViewModel result = new ProductDetailsViewModel
+            var productFromDb = this.context.Products.SingleOrDefault(product => product.Id == id);
+            ProductDetailsViewModel result = null;
+            if (productFromDb != null)
             {
-                Id = productFromDb.Id,
-                Price = productFromDb.Price,
-                Description = productFromDb.Description,
-                Weight = productFromDb.Weight,
-                Name = productFromDb.Name,
-                Picture = productFromDb.Picture,
-                Brand=productFromDb.Brand,
-            };
+                var category = this.context.Categories.FirstOrDefault(x => x.Id == productFromDb.CategoryId);
+                result = new ProductDetailsViewModel
+                {
+                    Id = productFromDb.Id,
+                    Price = productFromDb.Price,
+                    Description = productFromDb.Description,
+                    Weight = productFromDb.Weight,
+                    Name = productFromDb.Name,
+                    Picture = productFromDb.Picture,
+                    Brand = productFromDb.Brand,
+                    Category = category.Name,
+                };
+            }
+
             return result;
         }
     }

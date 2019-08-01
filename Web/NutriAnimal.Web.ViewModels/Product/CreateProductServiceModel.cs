@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NutriAnimal.Web.ViewModels.Product
 {
-   public  class CreateProductServiceModel
+   public class CreateProductServiceModel
     {
         public string Id { get; set; }
 
@@ -36,8 +36,9 @@ namespace NutriAnimal.Web.ViewModels.Product
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string Brand { get; set; }
 
-
         [Display(Name = "Picture")]
         public string Picture { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

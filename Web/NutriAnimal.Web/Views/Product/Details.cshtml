@@ -16,7 +16,7 @@
 
         <div class="d-flex flex-row flex-grow-1 ">
 
-            <img src="@Model.Picture">
+            <img class="img-thumbnail nutri-image" src="@Model.Picture">
 
         </div>
 
@@ -41,9 +41,9 @@
     <div>
         <button type="button" class="btn btn-info">Buy</button>
         <a href="/" class="btn btn-warning">Back</a>
-        @if(this.User.IsInRole("Administrator"))
+        @if (this.User.IsInRole("Administrator"))
         {
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-danger">Edit</a>
+            <a asp-area="Administration" asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-danger">Edit</a>
         }
     </div>
 
