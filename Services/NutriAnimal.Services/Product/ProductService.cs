@@ -8,6 +8,7 @@ using NutriAnimal.Data;
 using NutriAnimal.Web.ViewModels.Category;
 using NutriAnimal.Web.ViewModels.Product;
 using NutriAnimal.Data.Models;
+using NutriAnimal.Web.ViewModels.Order;
 
 namespace NutriAnimal.Services.Product
 {
@@ -119,5 +120,7 @@ namespace NutriAnimal.Services.Product
 
             return result;
         }
+
+        
     }
 }

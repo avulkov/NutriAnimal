@@ -18,6 +18,8 @@ namespace NutriAnimal.Data.Seeding
 
             await dbContext.Statuses.AddAsync(new Status { Name = "Shipped"});
             await dbContext.Statuses.AddAsync(new Status { Name = "Pending" });
+            await dbContext.Statuses.AddAsync(new Status { Name = "Active" });
+            await dbContext.Statuses.AddAsync(new Status { Name = "Completed" });
         }
     }
 }

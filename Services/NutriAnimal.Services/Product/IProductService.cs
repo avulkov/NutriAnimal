@@ -23,6 +23,10 @@ namespace NutriAnimal.Services.Product
 
         Task<bool> Delete(string id);
 
+        
+
+
+
 
     }
 }

@@ -25,6 +25,10 @@
     <Compile Remove="Migrations\20190713101035_CorrectionInDatabase.Designer.cs" />
     <Compile Remove="Migrations\20190801114143_IsDeletedAddedToProduct.cs" />
     <Compile Remove="Migrations\20190801114143_IsDeletedAddedToProduct.Designer.cs" />
+    <Compile Remove="Migrations\20190806104658_OrderModified.cs" />
+    <Compile Remove="Migrations\20190806104658_OrderModified.Designer.cs" />
+    <Compile Remove="Migrations\20190806105316_OrderModified.cs" />
+    <Compile Remove="Migrations\20190806105316_OrderModified.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

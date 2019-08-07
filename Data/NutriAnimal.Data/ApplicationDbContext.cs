@@ -65,7 +65,7 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
-            
+           
 
             ConfigureUserIdentityRelations(builder);
 

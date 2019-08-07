@@ -39,4 +39,8 @@
     <ProjectReference Include="..\NutriAnimal.Web.Infrastructure\NutriAnimal.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\NutriAnimal.Web.ViewModels\NutriAnimal.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Order\" />
+  </ItemGroup>
 </Project>
