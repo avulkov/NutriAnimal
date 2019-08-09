@@ -18,7 +18,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <header>
@@ -26,7 +27,7 @@
             @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
             {
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NutriAnimal</a>
+                    <a class="navbar-brand font-weight-bold h2" asp-area="" asp-controller="Home" asp-action="Index">NutriAnimal</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -35,21 +36,22 @@
                         <div>
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">My Orders</a>
+                                <li class="nav-item font-weight-bold ">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
                                 </li>
 
                                 <li>
                                     <div class="btn-group dropright">
-                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-success text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-success text-dark font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Admin Panel
                                         </button>
                                         <div class="dropdown-menu bg-warning font-weight-bold  text-warning"    >
-                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Category" asp-action="Create">Add category</a>
-                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
-                                            <a class="nav-link text-dark ml-2" asp-area="Administration" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
+                                            <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Category" asp-action="Create">Add category</a>
+
+                                            <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
+                                            <a class="nav-link text-dark ml-2 mr-2" asp-area="Administration" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
 
 
                                         </div>
@@ -88,10 +90,10 @@
                         <div>
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">My Orders</a>
+                                <li class="nav-item font-weight-bold ">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
                                 </li>
                                 
                             </ul>

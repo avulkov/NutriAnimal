@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NutriAnimal.Services.Order;
@@ -19,11 +20,44 @@ namespace NutriAnimal.Web.Controllers
             this.orderService = orderService;
             this.productService = productService;
         }
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    var product = this.productService.GetProductById();
-        //    return this.View(product);
-        //}
+
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var orders = this.orderService.GetAllOrders().Where(order => order.IssuerId == this.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToList();
+           
+            return this.View(orders);
+        }
+        [HttpPost]
+        [Route("/Order/{id}/Quantity/Reduce")]
+        public async Task<IActionResult> Reduce(string id)
+        {
+            bool result = await this.orderService.ReduceQuantity(id);
+
+            if (result)
+            {
+                return this.Ok();
+            }
+            else
+            {
+                return this.Forbid();
+            }
+        }
+
+        [HttpPost]
+        [Route("/Order/{id}/Quantity/Increase")]
+        public async Task<IActionResult> Increase(string id)
+        {
+            bool result = await this.orderService.IncreaseQuantity(id);
+
+            if (result)
+            {
+                return this.Ok();
+            }
+            else
+            {
+                return this.Forbid();
+            }
+        }
     }
 }

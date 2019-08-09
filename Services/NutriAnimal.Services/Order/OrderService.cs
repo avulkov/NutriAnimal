@@ -1,4 +1,5 @@
-﻿using NutriAnimal.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using NutriAnimal.Data;
 using NutriAnimal.Services.Product;
 using NutriAnimal.Web.ViewModels.Order;
 using NutriAnimal.Web.ViewModels.Product;
@@ -30,7 +31,7 @@ namespace NutriAnimal.Services.Order
                 ProductId = orderServiceModel.ProductId,
                 Quantity = orderServiceModel.Quantity,
                 OrderedOn = DateTime.UtcNow,
-                IssuerId=orderServiceModel.IssuerId,
+                IssuerId = orderServiceModel.IssuerId,
             };
             var price = productFromDb.Price * orderServiceModel.Quantity;
             order.TotalPrice = price;
@@ -41,5 +42,59 @@ namespace NutriAnimal.Services.Order
             var result = await this.context.SaveChangesAsync();
             return result > 0;
         }
+
+        public IQueryable<CartViewModel> GetAllOrders()
+        {
+            return this.context.Orders.Where(order=>order.Status.Name == "Active").Select(order => new CartViewModel
+            {
+                Id=order.Id,
+                ProductPrice = order.TotalPrice,
+                ProductName = order.Product.Name,
+                Quantity = order.Quantity,
+                ProductPicture=order.Product.Picture,
+                IssuerId=order.IssuerId
+            });
+        }
+        public async Task<bool> IncreaseQuantity(string orderId)
+        {
+            NutriAnimal.Data.Models.Order orderFromDb = await this.context.Orders
+                .SingleOrDefaultAsync(order => order.Id == orderId);
+
+            if (orderFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(orderFromDb));
+            }
+
+            orderFromDb.Quantity++;
+
+            this.context.Update(orderFromDb);
+            int result = await this.context.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+        public async Task<bool> ReduceQuantity(string orderId)
+        {
+            NutriAnimal.Data.Models.Order orderFromDb = await this.context.Orders
+                .SingleOrDefaultAsync(order => order.Id == orderId);
+
+            if (orderFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(orderFromDb));
+            }
+
+            if (orderFromDb.Quantity == 1)
+            {
+                return false;
+            }
+
+            orderFromDb.Quantity--;
+
+            this.context.Update(orderFromDb);
+            int result = await this.context.SaveChangesAsync();
+
+            return result > 0;
+        }
+
     }
 }
