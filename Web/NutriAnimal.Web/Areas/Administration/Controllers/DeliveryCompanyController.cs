@@ -31,6 +31,7 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
                     Id = deliveryCompany.Id,
                     Name = deliveryCompany.Name,
                     Description = deliveryCompany.Description,
+                    Price=deliveryCompany.Price,
                 
                 }).ToListAsync();
                 return this.View(allCompanies);
@@ -56,6 +57,7 @@ namespace NutriAnimal.Web.Areas.Administration.Controllers
             {
                 Name = companyInputModel.Name,
                 Description = companyInputModel.Description,
+                Price=companyInputModel.Price
             };
             await this.service.CreateDeliveryCompany(deliveryCompany);
             return this.Redirect("All");

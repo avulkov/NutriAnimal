@@ -48,8 +48,8 @@ else
         }
     </div>
     <hr class="nutri-hr">
-    <form action="/Order/Cart/Complete" method="post" class="d-flex justify-content-between">
-        <button class="btn btn-info font-weight-bold">Complete Order</button>
+    <form action="/Delivery/Complete" method="get" class="d-flex justify-content-between">
+        <button  class="btn btn-info font-weight-bold">Complete Order</button>
         <h2  id="total-price">Total: @Model.Sum(order => order.ProductPrice * order.Quantity).ToString("F2")</h2>
     </form>
     <script>

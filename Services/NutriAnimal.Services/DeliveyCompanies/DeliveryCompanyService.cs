@@ -27,6 +27,7 @@ namespace NutriAnimal.Services.DeliveyCompanies
             {
                 Name = deliveryCompanyInputModel.Name,
                 Description = deliveryCompanyInputModel.Description,
+                Price=deliveryCompanyInputModel.Price,
                 IsDeleted = false,
             };
 

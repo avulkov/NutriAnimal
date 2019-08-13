@@ -17,7 +17,7 @@
                     <div class="d-flex justify-content-center mt-3">
                         <label asp-for="Name" class="font-weight-bold"></label>
                     </div>
-                    <input asp-for="Name" class="form-control font-weight-bold text-center shadow p-3 mb-2 bg-white rounded" />
+                    <input asp-for="Name" class="form-control   shadow p-3 mb-2 bg-white rounded " placeholder="Name..." />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group ">
@@ -26,6 +26,13 @@
                     </div>
                     <textarea asp-for="Description" class="form-control shadow p-3 mb-2 bg-white rounded" rows="3" placeholder="Description..."></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+                    <div class="d-flex justify-content-center ">
+                        <label asp-for="Price" class="font-weight-bold"></label>
+                    </div>
+                    <input type="number" step="0.01" asp-for="Price" class="form-control shadow p-3 mb-2 bg-white rounded" rows="3" placeholder="Price..."></input>
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn bg-info mb-3 ">Create Company</button>

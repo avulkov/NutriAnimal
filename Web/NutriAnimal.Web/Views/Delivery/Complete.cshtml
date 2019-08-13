@@ -1,0 +1,59 @@
+﻿
+@model NutriAnimal.Web.ViewModels.Delivery.CreateDeliveryViewModel
+
+@{
+    ViewData["Title"] = "Complete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Complete</h1>
+
+<h4>CreateDeliveryViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Complete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Recipient" class="control-label"></label>
+                <input asp-for="Recipient" class="form-control" placeholder="Recipient Name..."/>
+                <span asp-validation-for="Recipient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" placeholder="Address..." />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <select asp-for="DeliveryCompany" class="browser-default p-2  shadow  mb-2  rounded ">
+                    <option selected disabled>Delivery company</option>
+                    @foreach (var company in (IEnumerable<NutriAnimal.Web.ViewModels.DeliveryCompany.CreateDeliveryCompanyInputModel>)this.ViewData["deliveryCompanies"])
+                    {
+                        <option value="@company.Name">@company.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DeliveryCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="DeliveryType" class="browser-default p-2  shadow  mb-2  rounded ">
+                    <option selected disabled>Delivery Type</option>
+                    @foreach (var deliveryType in (List<NutriAnimal.Web.ViewModels.Delivery.DeliveryOrderTypeViewModel>)this.ViewData["deliveryTypes"])
+                    {
+                        <option value="@deliveryType.Name">@deliveryType.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DeliveryType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn bg-info mb-3" >Finish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

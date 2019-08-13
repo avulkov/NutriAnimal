@@ -33,7 +33,7 @@ namespace NutriAnimal.Services.Order
                 OrderedOn = DateTime.UtcNow,
                 IssuerId = orderServiceModel.IssuerId,
             };
-            var price = productFromDb.Price * orderServiceModel.Quantity;
+            var price = productFromDb.Price ;
             order.TotalPrice = price;
             var status = this.context.Statuses.FirstOrDefault(statusDb => statusDb.Name == "Active");
             order.Status = status;

@@ -10,9 +10,11 @@ namespace NutriAnimal.Data.Models
 
         public decimal Price { get; set; }
 
-        public string RecipientId { get; set; }
+        public string IssuedById { get; set; }
 
-        public ApplicationUser Recipient { get; set; }
+        public ApplicationUser IssuedBy { get; set; }
+
+        public string Recipient { get; set; }
 
         public string DeliveryCompanyId { get; set; }
 
@@ -22,8 +24,6 @@ namespace NutriAnimal.Data.Models
 
         public DeliveryType DeliveryType { get; set; }
 
-        public string OrderId { get; set; }
-
-        public Order Order { get; set; }
+        public string Address { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NutriAnimal.Data;
 
 namespace NutriAnimal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190811110311_DeliveryCompanyAndDeliveryModified")]
+    partial class DeliveryCompanyAndDeliveryModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,11 +227,9 @@ namespace NutriAnimal.Data.Migrations
 
                     b.Property<string>("DeliveryTypeId");
 
-                    b.Property<string>("IssuedById");
-
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("Recipient");
+                    b.Property<string>("RecipientId");
 
                     b.HasKey("Id");
 
@@ -237,7 +237,7 @@ namespace NutriAnimal.Data.Migrations
 
                     b.HasIndex("DeliveryTypeId");
 
-                    b.HasIndex("IssuedById");
+                    b.HasIndex("RecipientId");
 
                     b.ToTable("Deliveries");
                 });
@@ -420,9 +420,9 @@ namespace NutriAnimal.Data.Migrations
                         .WithMany()
                         .HasForeignKey("DeliveryTypeId");
 
-                    b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "IssuedBy")
+                    b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "Recipient")
                         .WithMany()
-                        .HasForeignKey("IssuedById");
+                        .HasForeignKey("RecipientId");
                 });
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Order", b =>
