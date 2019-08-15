@@ -45,14 +45,15 @@ namespace NutriAnimal.Services.Order
 
         public IQueryable<CartViewModel> GetAllOrders()
         {
-            return this.context.Orders.Where(order=>order.Status.Name == "Active").Select(order => new CartViewModel
+            return this.context.Orders.Where(order => order.Status.Name == "Active").Select(order => new CartViewModel
             {
                 Id=order.Id,
                 ProductPrice = order.TotalPrice,
                 ProductName = order.Product.Name,
                 Quantity = order.Quantity,
                 ProductPicture=order.Product.Picture,
-                IssuerId=order.IssuerId
+                IssuerId=order.IssuerId,
+                
             });
         }
         public async Task<bool> IncreaseQuantity(string orderId)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NutriAnimal.Services.Delivery;
 using NutriAnimal.Services.DeliveyCompanies;
+using NutriAnimal.Services.Receipt;
 using NutriAnimal.Web.ViewModels.Delivery;
 using NutriAnimal.Web.ViewModels.DeliveryCompany;
 
@@ -15,11 +16,13 @@ namespace NutriAnimal.Web.Controllers
     {
         private readonly IDeliveryCompanyService deliveryCompany;
         private readonly IDeliveryService deliveryService;
+        private readonly IReceiptService receiptService;
 
-        public DeliveryController(IDeliveryCompanyService deliveryCompany,IDeliveryService deliveryService)
+        public DeliveryController(IDeliveryCompanyService deliveryCompany,IDeliveryService deliveryService,IReceiptService receiptService)
         {
             this.deliveryCompany = deliveryCompany;
             this.deliveryService = deliveryService;
+            this.receiptService = receiptService;
         }
         public IActionResult Complete()
         {
@@ -57,10 +60,13 @@ namespace NutriAnimal.Web.Controllers
                .ToList();
                 return this.View();
             }
+
             var delivery = deliveryModel;
+            
             delivery.IssuedById= this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-           await this.deliveryService.CompleteOrder(delivery);
-            return this.Redirect("/");
+            this.receiptService.CreateReceipt(delivery.IssuedById);
+            await this.deliveryService.CompleteOrder(delivery);
+            return this.Redirect("/Receipt/All");
         }
     }
 }

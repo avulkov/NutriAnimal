@@ -40,7 +40,9 @@
 
         public DbSet<Status> Statuses { get; set; }
 
-      
+        public DbSet<Receipt> Receipts { get; set; }
+
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -113,6 +115,8 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

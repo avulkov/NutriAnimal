@@ -5,7 +5,12 @@ using System.Text;
 namespace NutriAnimal.Data.Models
 {
     public class Delivery
+
     {
+        public Delivery()
+        {
+            this.Orders = new List<Order>();
+        }
         public string Id { get; set; }
 
         public decimal Price { get; set; }
@@ -25,5 +30,9 @@ namespace NutriAnimal.Data.Models
         public DeliveryType DeliveryType { get; set; }
 
         public string Address { get; set; }
+
+        public List<Order> Orders { get; set; }
+
+
     }
 }

@@ -51,6 +51,7 @@ namespace NutriAnimal.Services.DeliveyCompanies
 
             company.Name = companyToEdit.Name;
             company.Description = companyToEdit.Description;
+            company.Price = companyToEdit.Price;
             this.context.DeliveryCompanies.Update(company);
             var result = await this.context.SaveChangesAsync();
             return result > 0;

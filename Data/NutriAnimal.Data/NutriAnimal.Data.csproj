@@ -29,6 +29,10 @@
     <Compile Remove="Migrations\20190806104658_OrderModified.Designer.cs" />
     <Compile Remove="Migrations\20190806105316_OrderModified.cs" />
     <Compile Remove="Migrations\20190806105316_OrderModified.Designer.cs" />
+    <Compile Remove="Migrations\20190814145706_OrderReceiptFix.cs" />
+    <Compile Remove="Migrations\20190814145706_OrderReceiptFix.Designer.cs" />
+    <Compile Remove="Migrations\20190814151015_OrderReceiptFix.cs" />
+    <Compile Remove="Migrations\20190814151015_OrderReceiptFix.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

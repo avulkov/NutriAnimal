@@ -8,23 +8,27 @@ namespace NutriAnimal.Web.ViewModels.Delivery
 {
     public class CreateDeliveryInputModel
     {
+        public CreateDeliveryInputModel()
+        {
+            this.Orders = new List<Data.Models.Order>();
+        }
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         public string Address { get; set; }
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         public string Recipient { get; set; }
-       
-       
+
         [Required]
         public string DeliveryCompany { get; set; }
-        
-        
+
         [Required]
         public string DeliveryType { get; set; }
-        
+
         public string IssuedById { get; set; }
 
         public ApplicationUser IssuedBy { get; set; }
+
+        public List<NutriAnimal.Data.Models.Order> Orders { get; set; }
     }
 }

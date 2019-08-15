@@ -25,10 +25,12 @@ namespace NutriAnimal.Web.ViewModels.Product
 
         [Required]
         [Display(Name = "Weight")]
+        [Range(0, 100000000)]
         public double Weight { get; set; }
 
         [Required]
         [Display(Name = "Price")]
+        [Range(0, 100000000)]
         public decimal Price { get; set; }
 
         [Required]
@@ -36,7 +38,7 @@ namespace NutriAnimal.Web.ViewModels.Product
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string Brand { get; set; }
 
-      
+        [Required]
         [Display(Name = "Picture")]
         public IFormFile Picture { get; set; }
 

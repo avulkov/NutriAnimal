@@ -17,5 +17,7 @@ namespace NutriAnimal.Web.ViewModels.Order
         public string ProductName { get; set; }
 
         public int Quantity { get; set; }
+
+        
     }
 }

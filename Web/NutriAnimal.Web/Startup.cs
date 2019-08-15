@@ -33,6 +33,7 @@
     using NutriAnimal.Services;
     using NutriAnimal.Services.Order;
     using NutriAnimal.Services.Delivery;
+    using NutriAnimal.Services.Receipt;
 
     public class Startup
     {
@@ -127,6 +128,7 @@
             services.AddTransient<ICLoudinaryService, CloudinaryService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IDeliveryService,DeliveryService>();
+            services.AddTransient<IReceiptService,ReceiptService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NutriAnimal.Data;
 
 namespace NutriAnimal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190813134633_ReceiptAdded")]
+    partial class ReceiptAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,8 +279,6 @@ namespace NutriAnimal.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DeliveryId");
-
                     b.Property<string>("IssuerId");
 
                     b.Property<DateTime>("OrderedOn");
@@ -294,8 +294,6 @@ namespace NutriAnimal.Data.Migrations
                     b.Property<decimal>("TotalPrice");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeliveryId");
 
                     b.HasIndex("IssuerId");
 
@@ -451,10 +449,6 @@ namespace NutriAnimal.Data.Migrations
 
             modelBuilder.Entity("NutriAnimal.Data.Models.Order", b =>
                 {
-                    b.HasOne("NutriAnimal.Data.Models.Delivery", "Delivery")
-                        .WithMany("Orders")
-                        .HasForeignKey("DeliveryId");
-
                     b.HasOne("NutriAnimal.Data.Models.ApplicationUser", "Issuer")
                         .WithMany("Orders")
                         .HasForeignKey("IssuerId");
@@ -463,7 +457,7 @@ namespace NutriAnimal.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
-                    b.HasOne("NutriAnimal.Data.Models.Receipt", "Receipt")
+                    b.HasOne("NutriAnimal.Data.Models.Receipt")
                         .WithMany("Orders")
                         .HasForeignKey("ReceiptId");
 

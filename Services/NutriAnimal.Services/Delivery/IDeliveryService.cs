@@ -11,5 +11,7 @@ namespace NutriAnimal.Services.Delivery
         List<DeliveryOrderTypeViewModel> GetDeliveryTypes();
 
         Task<bool> CompleteOrder(CreateDeliveryInputModel inputModel);
+
+        Data.Models.Delivery GetDeliveryById(string id);
     }
 }

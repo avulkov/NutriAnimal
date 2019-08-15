@@ -29,6 +29,7 @@ namespace NutriAnimal.Web.ViewModels.Product
 
         [Required]
         [Display(Name = "Price")]
+        [Range(0, 100000000)]
         public decimal Price { get; set; }
 
         [Required]
