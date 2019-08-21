@@ -4,12 +4,14 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <h1 class="text-center">Create category</h1>
+    
     <div class="container-fluid rounded bg-light w-25">
+       
         
-        
-        <div class="row nutri-border border-info rounded">
-            <div class="col-md-12">
+        <div class="row  rounded">
+            <div class="col-md-12 pt-2">
+                <h3 class="text-center">Create category</h3>
+                <hr class="nutri-hr" />
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group text-center">

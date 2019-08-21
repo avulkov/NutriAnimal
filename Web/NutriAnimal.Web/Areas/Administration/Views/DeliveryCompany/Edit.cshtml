@@ -5,12 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Edit</h1>
 
 
-<div class="container-fluid justify-content-center w-50 bg-light ">
-    <div class="row bg-light  nutri-border border-info rounded ">
+
+<div class="container-fluid justify-content-center w-50 bg-light rounded">
+    <div class="row  pt-2">
+        
         <div class="col-md-12">
+            <h1 class="text-center">Edit</h1>
+            <hr class="nutri-hr" />
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">

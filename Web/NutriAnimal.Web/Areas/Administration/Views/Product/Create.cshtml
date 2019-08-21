@@ -7,11 +7,13 @@
     
 }
 
-<h1 class="text-center">Create product</h1>
+
 
 <div class="container-fluid rounded w-50 ">
-    <div class="row nutri-border  bg-light mt-3  border-info p-3 rounded ">
+    <div class="row   bg-light mt-3  border-info p-3 rounded ">
         <div class="col-md-12">
+            <h1 class="text-center">Create product</h1>
+            <hr class="nutri-hr" />
             <form method="post" class=" mx-auto" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -55,7 +57,7 @@
                         <input asp-for="Price" class="form-control shadow p-3 mb-2 bg-white rounded" type="number" step="0.01" placeholder="Price..." />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
-                    
+
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="form-group w-50 ">

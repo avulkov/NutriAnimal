@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body>
+<body style="background-image:url(https://wallpapercave.com/wp/wp2483009.jpg);background-position:center;background-size:contain;">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3 rounded">
             @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
@@ -39,10 +39,18 @@
                                     <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item font-weight-bold ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
-                                </li>
-                                <li class="nav-item font-weight-bold ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Receipt" asp-action="All">My Receipts</a>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-success text-dark font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Shopping Panel
+                                        </button>
+                                        <div class="dropdown-menu bg-warning font-weight-bold  text-warning">
+                                            <a class="nav-link text-dark border-bottom" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
+                                            <a class="nav-link text-dark border-bottom" asp-area="" asp-controller="Receipt" asp-action="All">My Receipts</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Delivery" asp-action="All">My Orders</a>
+
+
+                                        </div>
+                                    </div>
                                 </li>
                                 <li>
                                     <div class="btn-group dropright">
@@ -50,9 +58,9 @@
                                             Admin Panel
                                         </button>
                                         <div class="dropdown-menu bg-warning font-weight-bold  text-warning">
-                                            <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Category" asp-action="Create">Add category</a>
-
+                                            <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Category" asp-action="Create">Create Category</a>
                                             <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Product" asp-action="Create">Create Product</a>
+                                            <a class="nav-link text-dark ml-2 mr-2 border-bottom " asp-area="Administration" asp-controller="Delivery" asp-action="All">Order Menagement</a>
                                             <a class="nav-link text-dark ml-2 mr-2" asp-area="Administration" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
 
 
@@ -95,12 +103,23 @@
                                     <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item font-weight-bold ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
-                                </li>
-                                <li class="nav-item font-weight-bold ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Receipt" asp-action="All">My Receipts</a>
-                                </li>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-success text-dark font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Shopping Panel
+                                        </button>
+                                        <div class="dropdown-menu bg-warning font-weight-bold  text-warning">
+                                            <a class="nav-link text-dark border-bottom" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
+                                            <a class="nav-link text-dark border-bottom" asp-area="" asp-controller="Receipt" asp-action="All">My Receipts</a>
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Delivery" asp-action="All">My Orders</a>
 
+
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <li class="nav-item font-weight-bold ">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
+                                </li>
                             </ul>
 
                         </div>
@@ -142,7 +161,7 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container" >
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()

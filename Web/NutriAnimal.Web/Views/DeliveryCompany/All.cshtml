@@ -1,0 +1,23 @@
+﻿@model IEnumerable<NutriAnimal.Web.ViewModels.DeliveryCompany.DetailsDeliveryCompanyViewModel>
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-around pt-3">
+            @foreach(var company in Model)
+            {
+            <div class="col col-lg-3 bg-light rounded">
+                <h4 class="font-weight-bold text-center pt-2">@company.Name</h4>
+                <hr class="nutri-hr" />
+                <p>@company.Description</p>
+                <hr class="nutri-hr" />
+                <div class="text-left font-weight-bold pb-2">Price: $ @company.Price</div>
+            </div>
+            }
+
+        </div>
+
+    </div>

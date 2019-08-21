@@ -1,0 +1,36 @@
+﻿@model NutriAnimal.Web.ViewModels.Delivery.DeliveryViewModel
+
+@{
+    ViewData["Title"] = "Ship";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class=" container-fluid bg-light w-25 rounded">
+        <h1 class="text-center">Ship</h1>
+
+
+        <hr class="nutri-hr" />
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Ship">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <p class="text-center">Do you want to ship Order: <span class="font-weight-bold">@Model.Id</span> ?</p>
+                    </div>
+                    <hr class="nutri-hr" />
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group">
+                            <a class="btn btn-info" href="/">Back</a>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Ship" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+       
+
+
+    </div>
+

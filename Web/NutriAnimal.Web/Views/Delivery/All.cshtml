@@ -1,0 +1,67 @@
+﻿@model List<NutriAnimal.Web.ViewModels.Delivery.DeliveryViewModel>
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-between ">
+    <div id="deliveries-pending" class="col-md-5 font-weight-bold bg-light rounded">
+        <div class="delivery-info row mt-4">
+
+            <h3 class="col-md-6 text-left">Id</h3>
+            <h3 class="col-md-3 text-left">Recipient</h3>
+            <h3 class="col-md-3 text-right">Status</h3>
+
+        </div>
+        <hr class="nutri-hr">
+      
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (Model[i].Status == "Pending")
+            {
+                <div class=" row">
+
+                    <h5 class="col-md-6 text-left align-self-center">@Model[i].Id</h5>
+                    <h5 class="col-md-3 text-left align-self-center">@Model[i].Recipient</h5>
+                    <h5 class="col-md-3 text-right align-self-center text-warning">@(Model[i].Status)</h5>
+
+                </div>
+                <hr />
+            }
+
+
+        }
+    </div>
+    <div class="col-md-2"></div>
+    <div id="deliveries-shipped" class="col-md-5 font-weight-bold bg-light rounded ">
+        <div class="delivery-info row mt-4">
+
+            <h3 class="col-md-6 text-left">Id</h3>
+            <h3 class="col-md-3 text-left">Recipient</h3>
+            <h3 class="col-md-3 text-right">Status</h3>
+            
+
+        </div>
+        <hr class="nutri-hr">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (Model[i].Status == "Shipped")
+            {
+                <div class=" row">
+
+                    <h5 class="col-md-6 text-left align-self-center">@Model[i].Id</h5>
+                    <h5 class="col-md-3 text-left align-self-center">@Model[i].Recipient</h5>
+                    <h5 class="col-md-3 text-right align-self-center text-success">@(Model[i].Status) (Expect in 1-3 days)</h5>
+
+
+
+
+                </div>
+                <hr />
+            }
+
+        }
+    </div>
+</div>
+

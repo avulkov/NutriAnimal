@@ -14,20 +14,20 @@ namespace NutriAnimal.Web.Controllers
 {
     public class DeliveryController : Controller
     {
-        private readonly IDeliveryCompanyService deliveryCompany;
+        private readonly IDeliveryCompanyService deliveryCompanyService;
         private readonly IDeliveryService deliveryService;
         private readonly IReceiptService receiptService;
 
-        public DeliveryController(IDeliveryCompanyService deliveryCompany,IDeliveryService deliveryService,IReceiptService receiptService)
+        public DeliveryController(IDeliveryCompanyService deliveryCompanyService,IDeliveryService deliveryService,IReceiptService receiptService)
         {
-            this.deliveryCompany = deliveryCompany;
+            this.deliveryCompanyService = deliveryCompanyService;
             this.deliveryService = deliveryService;
             this.receiptService = receiptService;
         }
         public IActionResult Complete()
         {
 
-            var allDeliveryCompanies = this.deliveryCompany.GetAllDeliveryCompanies().ToList();
+            var allDeliveryCompanies = this.deliveryCompanyService.GetAllDeliveryCompanies().ToList();
             this.ViewData["deliveryCompanies"] = allDeliveryCompanies.Select(category => new CreateDeliveryCompanyInputModel
             {
                 Name = category.Name,
@@ -46,7 +46,7 @@ namespace NutriAnimal.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                var allDeliveryCompanies = this.deliveryCompany.GetAllDeliveryCompanies().ToList();
+                var allDeliveryCompanies = this.deliveryCompanyService.GetAllDeliveryCompanies().ToList();
                 this.ViewData["deliveryCompanies"] = allDeliveryCompanies.Select(category => new CreateDeliveryCompanyInputModel
                 {
                     Name = category.Name,
@@ -68,5 +68,13 @@ namespace NutriAnimal.Web.Controllers
             await this.deliveryService.CompleteOrder(delivery);
             return this.Redirect("/Receipt/All");
         }
+
+        public IActionResult All()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var deliveries = this.deliveryService.GetAllDeliveries().Where(delivery => delivery.IssuedById == userId).ToList();
+            return this.View(deliveries);
+        }
+        
     }
 }

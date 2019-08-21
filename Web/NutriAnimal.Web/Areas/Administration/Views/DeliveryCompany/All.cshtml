@@ -5,54 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Delivery Companies</h1>
 
-<div class="container-fluid w-75 justify-content-center bg-light">
-    <div class="pt-3">
-        <p>
-            <a asp-action="Create" class="btn bg-info">Create</a>
-        </p>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                @if (item.IsDeleted == false)
+
+    <div class="container-fluid w-75 justify-content-center bg-light rounded">
+        <h1 class="text-center">Delivery Companies</h1>
+        <hr class="nutri-hr" />
+        <div class="pt-3">
+            <p>
+                <a asp-action="Create" class="btn bg-info">Create</a>
+            </p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <tr>
+                    @if (item.IsDeleted == false)
+                    {
+                        <tr>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn bg-warning">Edit</a>
-                        </td>
-                        <td>
+                            <td class="font-weight-bold">
+                                <h4>@Html.DisplayFor(modelItem => item.Name)</h4> 
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn bg-warning">Edit</a>
+                            </td>
+                            <td>
 
 
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn bg-danger">Delete</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn bg-danger">Delete</a>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-</div>
+    </div>
 

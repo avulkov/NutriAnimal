@@ -1,0 +1,69 @@
+﻿@model IEnumerable<NutriAnimal.Web.ViewModels.Delivery.DeliveryViewModel>
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=" container-fluid bg-light rounded">
+    <h1 class="text-center pt-3">All Orders</h1>
+
+    <hr class="nutri-hr" />
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Recipient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            @foreach (var item in Model.Where(delivery => delivery.Status == "Pending" || delivery.Status == "Shipped"))
+            {
+            
+
+
+                <tr>
+                    <td class="pt-3">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="pt-3">
+                        @Html.DisplayFor(modelItem => item.Recipient)
+                    </td>
+                    <td class="pt-3">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td></td>
+
+                    @if (item.Status == "Pending")
+                    {
+                        <td>
+                            <a asp-action="Ship" asp-route-id="@item.Id" class="btn btn-warning">Ship Order</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-action="Finish" asp-route-id="@item.Id" class="btn btn-danger text-dark">Close Order</a>
+                        </td>
+                    }
+
+
+                </tr>
+            
+
+            }
+        </tbody>
+    </table>
+</div>

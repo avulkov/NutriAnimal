@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NutriAnimal.Data;
 using NutriAnimal.Data.Models;
 using NutriAnimal.Web.ViewModels.Delivery;
@@ -31,6 +32,7 @@ namespace NutriAnimal.Services.Delivery
                 Address = inputModel.Address,
                 IssuedById = inputModel.IssuedById,
                 Recipient = inputModel.Recipient,
+                Status=this.context.Statuses.First(status => status.Name == "Pending"),
             };
             foreach (var item in orders)
             {
@@ -56,11 +58,12 @@ namespace NutriAnimal.Services.Delivery
             }
             else if (allWeight<5)
             {
-                delivery.Price = deliveryCompany.Price * 1.3M;
+                delivery.Price = deliveryCompany.Price * 1.5M;
             }
             else
             {
-                delivery.Price = deliveryCompany.Price * 1.5M;
+                var heavyDelivery = (decimal)(allWeight * 0.75);
+                delivery.Price = (deliveryCompany.Price * 1.5M) + heavyDelivery;
             }
 
             if (deliveryType.Name == "To Address")
@@ -82,9 +85,35 @@ namespace NutriAnimal.Services.Delivery
             return result > 0;
         }
 
+        public async Task<bool> Finish(string id)
+        {
+            var deliveryToFinish = await this.context.Deliveries.FirstOrDefaultAsync(delivery => delivery.Id == id);
+            if (deliveryToFinish == null)
+            {
+                throw new ArgumentNullException(nameof(deliveryToFinish));
+            }
+            var status = this.context.Statuses.FirstOrDefault(statusDb => statusDb.Name == "Completed");
+            deliveryToFinish.Status = status;
+            this.context.Deliveries.Update(deliveryToFinish);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
+
+        public List<DeliveryViewModel> GetAllDeliveries()
+        {
+          return  this.context.Deliveries.Select(deliver => new DeliveryViewModel {
+              Id=deliver.Id,
+              Status=deliver.Status.Name,
+              Recipient=deliver.Recipient,
+              IssuedById=deliver.IssuedById,
+          }).ToList();
+            
+        }
+
         public Data.Models.Delivery GetDeliveryById(string id)
         {
-            return this.context.Deliveries.FirstOrDefault(delivery => delivery.Id == id);
+            var result = this.context.Deliveries.SingleOrDefault(deliveryDb => deliveryDb.Id == id);
+            return result;
         }
 
         public List<DeliveryOrderTypeViewModel> GetDeliveryTypes()
@@ -93,6 +122,21 @@ namespace NutriAnimal.Services.Delivery
             {
                 Name = deliveryType.Name,
             }).ToList();
+        }
+
+        public async Task<bool> ShipDelivery(string id)
+        {
+            var deliveryToShip = await this.context.Deliveries.FirstOrDefaultAsync(delivery => delivery.Id == id);
+            if (deliveryToShip == null)
+            {
+                throw new ArgumentNullException(nameof(deliveryToShip));
+            }
+
+            var status = this.context.Statuses.FirstOrDefault(statusDb => statusDb.Name == "Shipped");
+            deliveryToShip.Status = status;
+            this.context.Deliveries.Update(deliveryToShip);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
         }
     }
 }
