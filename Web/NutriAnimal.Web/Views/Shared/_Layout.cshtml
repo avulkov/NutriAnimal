@@ -69,9 +69,14 @@
                                 </li>
 
 
+
+
+
+
                             </ul>
 
                         </div>
+                        
                         <div>
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
@@ -116,13 +121,15 @@
                                         </div>
                                     </div>
                                 </li>
-                                
+
                                 <li class="nav-item font-weight-bold ">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="DeliveryCompany" asp-action="All">Delivery Companies</a>
                                 </li>
+
                             </ul>
 
                         </div>
+                        
                         <div>
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
@@ -161,7 +168,7 @@
         </nav>
     </header>
 
-    <div class="container" >
+    <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
@@ -173,7 +180,7 @@
             &copy; @DateTime.Now.Year - NutriAnimal - by Alexander Valkov
         </div>
     </footer>
-
+    
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>

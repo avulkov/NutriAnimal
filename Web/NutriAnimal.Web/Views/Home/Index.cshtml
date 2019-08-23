@@ -6,80 +6,106 @@
 }
 
 
-<div class="jumbotron  rounded w-75 pb-3 container-fluid ">
+    <div class="jumbotron  rounded w-75 pb-3 container-fluid ">
 
-    <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
-    <h3 class="text-center ">The best store for nutrition supplements.</h3>
-    <hr class="nutri-hr">
-    @if (this.User.Identity.IsAuthenticated)
-    {
+        <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
+        <h3 class="text-center ">The best store for nutrition supplements.</h3>
+        <hr class="nutri-hr">
 
-        @for (int i = 0; i < Model.Count(); i += 3)
+        @if (this.User.Identity.IsAuthenticated)
         {
-<div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
-    @for (int j = i; j < i + 3; j++)
-    {
-
-        if (j < Model.Count())
-        {
-            
-                <div class="col-md-4">
-
-                    <div class="image-holder d-flex justify-content-center">
-
-                        <a href="/Product/Details/@Model[j].Id" class="btn ">
-                            <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
-                        </a>
 
 
-                    </div>
-
-                    <div>
-                        <a href="/Product/Details/@Model[j].Id" class="text-center">
-
-                            <ul class="list-unstyled font-weight-bold text-info">
-
-                                <li>
-                                    @Model[j].Name
-                                </li>
-                                <li>
-                                    $ @Model[j].Price
-                                </li>
-                            </ul>
-
-                        </a>
-                    </div>
+            <div id="products-search-bar-holder" class="form-group d-flex justify-content-between w-50">
+                <input type="text" class="form-control " id="products-search-bar" name="search" placeholder="Search..." />
+            </div>
 
 
+            <hr class="nutri-hr">
+
+            @for (int i = 0; i < Model.Count(); i += 3)
+            {
+
+                <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
+                    @for (int j = i; j < i + 3; j++)
+                    {
+
+                        if (j < Model.Count())
+                        {
+
+                            <div class="product col-md-4">
+
+                                <div class="image-holder d-flex justify-content-center">
+
+                                    <a href="/Product/Details/@Model[j].Id" class="btn ">
+                                        <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
+                                    </a>
+
+
+                                </div>
+
+                                <div>
+                                    <a href="/Product/Details/@Model[j].Id" class="text-center">
+
+                                        <ul class="list-unstyled font-weight-bold text-info">
+
+                                            <li>
+                                                @Model[j].Name
+                                            </li>
+                                            <li>
+                                                $ @Model[j].Price
+                                            </li>
+                                        </ul>
+
+                                    </a>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        }
+                        else
+                        {
+                            <div class="nutri-empty-div col-md-4">
+                            </div>
+                        }
+
+
+                    }
 
                 </div>
-            
-
+                <hr class="nutri-hr">
+            }
 
         }
         else
         {
-            <div class="nutri-empty-div col-md-4">
-            </div>
+            <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
+            <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
         }
 
 
-    }
-
-</div>
-            <hr class="nutri-hr">
-        }
-
-    }
-    else
-    {
-        <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
-        <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
-    }
+        <script>
 
 
+            $('#products-search-bar').on("change paste keyup", function () {
+                $('.product').show();
+
+                let searchValue = $('#products-search-bar').val();
+
+                for (let elem of $('.product')) {
+                    let productName = $($(elem).children()[1]).text();
+
+                    if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
+                        $(elem).hide();
+                    }
+                }
+            });
+        </script>
 
 
 
-
-</div>
+    </div>
