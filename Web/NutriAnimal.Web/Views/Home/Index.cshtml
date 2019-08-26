@@ -14,9 +14,15 @@
     {
 
 
-        <div id="products-search-bar-holder" class="form-group d-flex justify-content-between w-50">
-            <input type="text" class="form-control " id="products-search-bar" name="search" placeholder="Search..." />
-        </div>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p class="font-weight-bold">
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-info" /> 
+          
+        </p>
+    </div>
+</form>
 
 
         <hr class="nutri-hr">
@@ -84,23 +90,21 @@
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
-    <div class="d-flex justify-content-between" >
-        <a asp-action="Index"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-info pl-3 @prevDisabled">
-            Previous
-        </a>
-        <a asp-action="Index"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-info @nextDisabled">
-            Next
-        </a>
-    </div>
-    
+
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-info pl-3 @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-info @nextDisabled">
+        Next
+    </a>
 </div>
 
 
@@ -112,23 +116,7 @@
     }
 
 
-    <script>
-
-
-        $('#products-search-bar').on("change paste keyup", function () {
-            $('.product').show();
-
-            let searchValue = $('#products-search-bar').val();
-
-            for (let elem of $('.product')) {
-                let productName = $($(elem).children()[1]).text();
-
-                if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
-                    $(elem).hide();
-                }
-            }
-        });
-    </script>
+   
 
 
 

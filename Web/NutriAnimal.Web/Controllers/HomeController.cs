@@ -46,8 +46,11 @@
 
             var products = from s in this.context.Products
                            select s;
-           
-         
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+
 
             int pageSize = 6;
             return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));

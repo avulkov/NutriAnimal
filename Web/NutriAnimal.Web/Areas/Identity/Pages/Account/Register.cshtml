@@ -4,13 +4,13 @@
     ViewData["Title"] = "Register";
 }
 
-<h1 class=" text-dark font-weight-bold text-center p-3 w-50 mx-auto rounded">Register</h1>
+
 <div class="container d-flex justify-content-center">
     <div class="row d-flex align-content-center bg-light  nutri-border border-info rounded ">
         <div class="col-md-12  ">
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="text-center ">
-                <h4 class="mt-4">Create a new account.</h4>
-                <hr class="hr-2 bg-info mt-4" />
+                <h1 class="mt-4 font-weight-bold">Create a new account.</h1>
+                <hr class="nutri-hr" />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Input.Email" class="text-dark h5"></label>
@@ -18,12 +18,12 @@
                     <span asp-validation-for="Input.Email" class="text-dark"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Password"  class="text-dark h5"></label>
+                    <label asp-for="Input.Password" class="text-dark h5"></label>
                     <input asp-for="Input.Password" class="form-control shadow p-3 mb-2 bg-white rounded" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"  class="text-dark h5"></label>
+                    <label asp-for="Input.ConfirmPassword" class="text-dark h5"></label>
                     <input asp-for="Input.ConfirmPassword" class="form-control shadow p-3 mb-2 bg-white rounded" />
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
