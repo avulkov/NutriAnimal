@@ -34,6 +34,7 @@
     using NutriAnimal.Services.Order;
     using NutriAnimal.Services.Delivery;
     using NutriAnimal.Services.Receipt;
+    using ReflectionIT.Mvc.Paging;
 
     public class Startup
     {
@@ -129,6 +130,7 @@
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IDeliveryService,DeliveryService>();
             services.AddTransient<IReceiptService,ReceiptService>();
+            services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

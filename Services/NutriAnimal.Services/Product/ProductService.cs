@@ -9,16 +9,21 @@ using NutriAnimal.Web.ViewModels.Category;
 using NutriAnimal.Web.ViewModels.Product;
 using NutriAnimal.Data.Models;
 using NutriAnimal.Web.ViewModels.Order;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
 
 namespace NutriAnimal.Services.Product
 {
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext context;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public ProductService(ApplicationDbContext context)
+        public ProductService(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             this.context = context;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<bool> Create(CreateProductServiceModel inputModel)
@@ -120,7 +125,22 @@ namespace NutriAnimal.Services.Product
 
             return result;
         }
+        public async Task<List<NutriAnimal.Data.Models.Product>> GetPaginatedResult(int currentPage, int pageSize = 10)
+        {
+            var data = await GetData();
+            return data.OrderBy(d => d.Id).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        }
 
-        
+        public async Task<int> GetCount()
+        {
+            var data = await GetData();
+            return data.Count;
+        }
+
+        private async Task<List<NutriAnimal.Data.Models.Product>> GetData()
+        {
+            var json = await File.ReadAllTextAsync(Path.Combine(this.hostingEnvironment.ContentRootPath, "Data", "paging.json"));
+            return JsonConvert.DeserializeObject<List<NutriAnimal.Data.Models.Product>>(json);
+        }
     }
 }

@@ -1,111 +1,135 @@
-﻿@model List<NutriAnimal.Web.ViewModels.Product.ProductHomeViewModel>
-
+﻿@model NutriAnimal.Services.Pagination.PaginatedList<NutriAnimal.Data.Models.Product>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}}
 
 
-    <div class="jumbotron  rounded w-75 pb-3 container-fluid ">
+<div class="jumbotron  rounded w-75 pb-3 container-fluid ">
 
-        <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
-        <h3 class="text-center ">The best store for nutrition supplements.</h3>
+    <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
+    <h3 class="text-center ">The best store for nutrition supplements.</h3>
+    <hr class="nutri-hr">
+
+    @if (this.User.Identity.IsAuthenticated)
+    {
+
+
+        <div id="products-search-bar-holder" class="form-group d-flex justify-content-between w-50">
+            <input type="text" class="form-control " id="products-search-bar" name="search" placeholder="Search..." />
+        </div>
+
+
         <hr class="nutri-hr">
 
-        @if (this.User.Identity.IsAuthenticated)
+
+        @for (int i = 0; i < Model.Count(); i += 3)
         {
 
+            <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
+                @for (int j = i; j < i + 3; j++)
+                {
 
-            <div id="products-search-bar-holder" class="form-group d-flex justify-content-between w-50">
-                <input type="text" class="form-control " id="products-search-bar" name="search" placeholder="Search..." />
-            </div>
-
-
-            <hr class="nutri-hr">
-
-            @for (int i = 0; i < Model.Count(); i += 3)
-            {
-
-                <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
-                    @for (int j = i; j < i + 3; j++)
+                    if (j < Model.Count())
                     {
 
-                        if (j < Model.Count())
-                        {
+                        <div class="product col-md-4">
 
-                            <div class="product col-md-4">
+                            <div class="image-holder d-flex justify-content-center">
 
-                                <div class="image-holder d-flex justify-content-center">
-
-                                    <a href="/Product/Details/@Model[j].Id" class="btn ">
-                                        <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
-                                    </a>
-
-
-                                </div>
-
-                                <div>
-                                    <a href="/Product/Details/@Model[j].Id" class="text-center">
-
-                                        <ul class="list-unstyled font-weight-bold text-info">
-
-                                            <li>
-                                                @Model[j].Name
-                                            </li>
-                                            <li>
-                                                $ @Model[j].Price
-                                            </li>
-                                        </ul>
-
-                                    </a>
-                                </div>
-
+                                <a href="/Product/Details/@Model[j].Id" class="btn ">
+                                    <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
+                                </a>
 
 
                             </div>
 
+                            <div>
+                                <a href="/Product/Details/@Model[j].Id" class="text-center">
 
+                                    <ul class="list-unstyled font-weight-bold text-info">
 
-                        }
-                        else
-                        {
-                            <div class="nutri-empty-div col-md-4">
+                                        <li>
+                                            @Model[j].Name
+                                        </li>
+                                        <li>
+                                            $ @Model[j].Price
+                                        </li>
+                                    </ul>
+
+                                </a>
                             </div>
-                        }
+
+
+
+                        </div>
+
 
 
                     }
-
-                </div>
-                <hr class="nutri-hr">
-            }
-
-        }
-        else
-        {
-            <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
-            <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
-        }
-
-
-        <script>
-
-
-            $('#products-search-bar').on("change paste keyup", function () {
-                $('.product').show();
-
-                let searchValue = $('#products-search-bar').val();
-
-                for (let elem of $('.product')) {
-                    let productName = $($(elem).children()[1]).text();
-
-                    if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
-                        $(elem).hide();
+                    else
+                    {
+                        <div class="nutri-empty-div col-md-4">
+                        </div>
                     }
+
+
                 }
-            });
-        </script>
 
+            </div>
+            <hr class="nutri-hr">
+        }
 
-
+<div class="d-flex justify-content-end">
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <div class="d-flex justify-content-between" >
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-info pl-3 @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-info @nextDisabled">
+            Next
+        </a>
     </div>
+    
+</div>
+
+
+    }
+    else
+    {
+        <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
+        <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
+    }
+
+
+    <script>
+
+
+        $('#products-search-bar').on("change paste keyup", function () {
+            $('.product').show();
+
+            let searchValue = $('#products-search-bar').val();
+
+            for (let elem of $('.product')) {
+                let productName = $($(elem).children()[1]).text();
+
+                if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
+                    $(elem).hide();
+                }
+            }
+        });
+    </script>
+
+
+
+</div>

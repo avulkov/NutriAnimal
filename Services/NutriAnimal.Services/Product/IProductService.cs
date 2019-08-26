@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using NutriAnimal.Web.ViewModels.Category;
 using NutriAnimal.Web.ViewModels.Product;
 using System;
@@ -23,7 +24,9 @@ namespace NutriAnimal.Services.Product
 
         Task<bool> Delete(string id);
 
-        
+        Task<List<NutriAnimal.Data.Models.Product>> GetPaginatedResult(int currentPage, int pageSize = 10);
+        Task<int> GetCount();
+
 
 
 
