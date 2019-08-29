@@ -1,123 +1,154 @@
-﻿@model NutriAnimal.Services.Pagination.PaginatedList<NutriAnimal.Data.Models.Product>
+﻿@using NutriAnimal.Web.ViewModels.Category
+@model NutriAnimal.Services.Pagination.PaginatedList<NutriAnimal.Data.Models.Product>
 @{
     ViewData["Title"] = "Index";
+
 }}
-
-
-<div class="jumbotron  rounded w-75 pb-3 container-fluid ">
-
-    <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
-    <h3 class="text-center ">The best store for nutrition supplements.</h3>
-    <hr class="nutri-hr">
-
-    @if (this.User.Identity.IsAuthenticated)
-    {
-
-
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p class="font-weight-bold">
-            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-info" /> 
-          
-        </p>
-    </div>
-</form>
-
-
-        <hr class="nutri-hr">
-
-
-        @for (int i = 0; i < Model.Count(); i += 3)
+    <div class="d-flex justify-content-between">
+        @if (this.User.Identity.IsAuthenticated)
         {
+        <div >
+            
 
-            <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
-                @for (int j = i; j < i + 3; j++)
+            <div class="buttons-container bg-light rounded pb-3">
+                <div>
+                    <h3 class="text-center font-weight-bold pl-3 pr-3 pt-3">Categories</h3>
+                    <hr class="nutri-hr w-75" />
+                </div>
+                <ul class="list-unstyled text-center pb-lg-3">
+                    <li><a class="btn btn-primary mb-5 " href="/Product/GetProteins">Protein</a></li>
+                    <li><a class="btn btn-primary mb-5" href="/Product/GetAminoAcids">Amino Acid</a></li>
+                    <li><a class="btn btn-primary mb-5" href="/Product/GetFatBurners">Fat Burner</a></li>
+                    <li><a class="btn btn-primary mb-5" href="/Product/GetCreatins">Creatin</a></li>
+                    <li><a class="btn btn-primary " href="/Product/GetPreWorkouts">Pre-Workout</a></li>
+                </ul>
+                <hr class="nutri-hr w-75 " />
+            </div>
+           
+        </div>
+           
+        }
+        <div class="jumbotron  rounded w-75 pb-3 container-fluid bg-light ">
+
+            <h1 class="display-4 text-center">Welcome to NutriAnimal!</h1>
+            <h3 class="text-center ">The best store for nutrition supplements.</h3>
+            <hr class="nutri-hr">
+
+            @if (this.User.Identity.IsAuthenticated)
+            {
+
+
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color">
+                        <p class="font-weight-bold">
+                            Find by name: <input class="rounded shadow mx-3" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                            <input type="submit" value="Search" class="btn btn-info" />
+
+                        </p>
+                    </div>
+                </form>
+
+
+
+
+
+
+                <hr class="nutri-hr">
+
+
+                @for (int i = 0; i < Model.Count(); i += 3)
                 {
 
-                    if (j < Model.Count())
-                    {
+                    <div class="row  mb-4 pb-5 pt-4 d-flex justify-content-center">
+                        @for (int j = i; j < i + 3; j++)
+                        {
 
-                        <div class="product col-md-4">
+                            if (j < Model.Count())
+                            {
 
-                            <div class="image-holder d-flex justify-content-center">
+                                <div class="product col-md-4">
 
-                                <a href="/Product/Details/@Model[j].Id" class="btn ">
-                                    <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
-                                </a>
+                                    <div class="image-holder d-flex justify-content-center">
 
-
-                            </div>
-
-                            <div>
-                                <a href="/Product/Details/@Model[j].Id" class="text-center">
-
-                                    <ul class="list-unstyled font-weight-bold text-info">
-
-                                        <li>
-                                            @Model[j].Name
-                                        </li>
-                                        <li>
-                                            $ @Model[j].Price
-                                        </li>
-                                    </ul>
-
-                                </a>
-                            </div>
+                                        <a href="/Product/Details/@Model[j].Id" class="btn ">
+                                            <img class="img-thumbnail nutri-image " src="@Model[j].Picture">
+                                        </a>
 
 
+                                    </div>
 
-                        </div>
+                                    <div>
+                                        <a href="/Product/Details/@Model[j].Id" class="text-center">
+
+                                            <ul class="list-unstyled font-weight-bold text-info">
+
+                                                <li>
+                                                    @Model[j].Name
+                                                </li>
+                                                <li>
+                                                    $ @Model[j].Price
+                                                </li>
+                                            </ul>
+
+                                        </a>
+                                    </div>
 
 
 
-                    }
-                    else
-                    {
-                        <div class="nutri-empty-div col-md-4">
-                        </div>
-                    }
+                                </div>
 
 
+
+                            }
+                            else
+                            {
+                                <div class="nutri-empty-div col-md-4">
+                                </div>
+                            }
+
+
+                        }
+
+                    </div>
+                    <hr class="nutri-hr">
                 }
 
-            </div>
-            <hr class="nutri-hr">
-        }
+                <div class="d-flex justify-content-end">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
 
-<div class="d-flex justify-content-end">
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    }
-
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@(Model.PageIndex - 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-info pl-3 @prevDisabled">
-        Previous
-    </a>
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@(Model.PageIndex + 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-info @nextDisabled">
-        Next
-    </a>
-</div>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-pageNumber="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-info @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-pageNumber="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-info mx-3  @nextDisabled">
+                        Next
+                    </a>
+                </div>
 
 
-    }
-    else
-    {
-        <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
-        <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
-    }
-
-
-   
+            }
+            else
+            {
+                <p><a href="/Identity/Account/Login">Login</a> , if you have an account.</p>
+                <p><a href="/Identity/Account/Register">Register</a> to gain maximum user experience.</p>
+            }
 
 
 
-</div>
+
+
+
+        </div>
+
+    </div>
+    

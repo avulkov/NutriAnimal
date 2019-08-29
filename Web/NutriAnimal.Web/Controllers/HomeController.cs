@@ -6,19 +6,20 @@
     using NutriAnimal.Data.Models;
     using NutriAnimal.Services.Pagination;
     using NutriAnimal.Services.Product;
+    using NutriAnimal.Web.ViewModels.Category;
     using NutriAnimal.Web.ViewModels.Product;
     using ReflectionIT.Mvc.Paging;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-   
+
 
     public class HomeController : BaseController
     {
         private readonly IProductService productService;
         private readonly ApplicationDbContext context;
 
-        public HomeController(IProductService productService,ApplicationDbContext context)
+        public HomeController(IProductService productService, ApplicationDbContext context)
         {
             this.productService = productService;
             this.context = context;
@@ -53,27 +54,18 @@
 
 
             int pageSize = 6;
-            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+            var allCategories = await this.productService.GetAllCategories().ToListAsync();
+            this.ViewData["categories"] = allCategories.Select(category => new CreateCategoryInputModel
+            {
+                Name = category.Name,
+                Id = category.Id,
+
+            })
+           .ToList();
+
+            return this.View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-        //public async Task< IActionResult> Index(int page = 1)
-        //{
-        //    var query = this.context.Products.AsNoTracking().OrderBy(p => p.Id);
-        //    var moderl = await PagingList.CreateAsync(query,3,page);
-        //    //var products = this.productService.GetAllProducts().Select(product => new ProductHomeViewModel
-        //    //{
-        //    //    Id = product.Id,
-        //    //    Name = product.Name,
-        //    //    Price = product.Price,
-        //    //    Picture = product.Picture,
-
-        //    //}).ToList();
-
-        //    return this.View(moderl);
-        //}
-        
-
-
-
 
 
     }
