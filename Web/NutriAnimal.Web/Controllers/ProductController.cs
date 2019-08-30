@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NutriAnimal.Data;
@@ -24,17 +25,18 @@ namespace NutriAnimal.Web.Controllers
         private readonly ICategoryService categoryService;
         private readonly ApplicationDbContext context;
 
-        public ProductController(IProductService productService, IOrderService orderService,ICategoryService categoryService,ApplicationDbContext context)
+        public ProductController(IProductService productService, IOrderService orderService, ICategoryService categoryService, ApplicationDbContext context)
         {
             this.productService = productService;
             this.orderService = orderService;
             this.categoryService = categoryService;
             this.context = context;
         }
-      public async Task<IActionResult> GetProteins(string sortOrder,
-    string currentFilter,
-    string searchString,
-    int? pageNumber)
+        [Authorize]
+        public async Task<IActionResult> GetProteins(string sortOrder,
+      string currentFilter,
+      string searchString,
+      int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -60,10 +62,11 @@ namespace NutriAnimal.Web.Controllers
 
 
             int pageSize = 6;
-           
+
             return this.View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        [Authorize]
         public async Task<IActionResult> GetAminoAcids(string sortOrder,
     string currentFilter,
     string searchString,
@@ -97,6 +100,7 @@ namespace NutriAnimal.Web.Controllers
             return this.View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        [Authorize]
         public async Task<IActionResult> GetFatBurners(string sortOrder,
    string currentFilter,
    string searchString,
@@ -130,6 +134,7 @@ namespace NutriAnimal.Web.Controllers
             return this.View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        [Authorize]
         public async Task<IActionResult> GetCreatins(string sortOrder,
   string currentFilter,
   string searchString,
@@ -163,6 +168,7 @@ namespace NutriAnimal.Web.Controllers
             return this.View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        [Authorize]
         public async Task<IActionResult> GetPreWorkouts(string sortOrder,
   string currentFilter,
   string searchString,
@@ -204,6 +210,7 @@ namespace NutriAnimal.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Order(ProductOrderInputModel productOrderInputModel)
         {
             var orderServiceModel = new OrderServiceModel

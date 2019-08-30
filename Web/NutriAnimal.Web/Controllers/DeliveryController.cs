@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriAnimal.Services.Delivery;
 using NutriAnimal.Services.DeliveyCompanies;
@@ -24,6 +25,7 @@ namespace NutriAnimal.Web.Controllers
             this.deliveryService = deliveryService;
             this.receiptService = receiptService;
         }
+        [Authorize]
         public IActionResult Complete()
         {
 
@@ -41,6 +43,7 @@ namespace NutriAnimal.Web.Controllers
            .ToList();
             return this.View();
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Complete(CreateDeliveryInputModel deliveryModel)
         {
@@ -68,7 +71,7 @@ namespace NutriAnimal.Web.Controllers
             await this.deliveryService.CompleteOrder(delivery);
             return this.Redirect("/Receipt/All");
         }
-
+        [Authorize]
         public IActionResult All()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

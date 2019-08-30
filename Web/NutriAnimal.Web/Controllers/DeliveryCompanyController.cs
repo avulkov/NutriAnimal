@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriAnimal.Data;
 using NutriAnimal.Web.ViewModels.DeliveryCompany;
@@ -16,6 +17,7 @@ namespace NutriAnimal.Web.Controllers
         {
             this.context = context;
         }
+        [Authorize]
         public IActionResult All()
         {
             var deliveryCompanies = this.context.DeliveryCompanies.Select(company => new DetailsDeliveryCompanyViewModel

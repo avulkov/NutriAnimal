@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutriAnimal.Data.Models;
 using NutriAnimal.Services.Delivery;
@@ -27,12 +28,14 @@ namespace NutriAnimal.Web.Controllers
             this.productService = productService;
             this.deliveryService = deliveryService;
         }
+        [Authorize]
         public IActionResult All ()
         {
             var orders = this.receiptService.GetAllReceipts().Where(order => order.RecipientId == this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             return this.View(orders);
         }
-      
+
+        [Authorize]
         public IActionResult Details(string id)
         {
             

@@ -103,14 +103,14 @@
            asp-route-sortOrder="@ViewData["CurrentSort"]"
            asp-route-pageNumber="@(Model.PageIndex - 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-info @prevDisabled">
+           class="btn btn-info nutri-button @prevDisabled">
             Previous
         </a>
         <a asp-action="Index"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
            asp-route-pageNumber="@(Model.PageIndex + 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-info mx-3  @nextDisabled">
+           class="btn btn-info mx-3 nutri-button  @nextDisabled">
             Next
         </a>
     </div>

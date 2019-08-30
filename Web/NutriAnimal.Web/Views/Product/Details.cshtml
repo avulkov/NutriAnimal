@@ -39,7 +39,10 @@
 
         <hr class="nutri-hr" />
         <div>
-            <button data-toggle="modal" data-target="#orderModal" class="btn btn-info">Buy</button>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <button data-toggle="modal" data-target="#orderModal" class="btn btn-info">Buy</button>
+            }
             <a href="/" class="btn btn-warning">Back</a>
             @if (this.User.IsInRole("Administrator"))
             {
